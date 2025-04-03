@@ -4,6 +4,7 @@ import { createApp, provide, h } from "vue";
 import { createPinia } from 'pinia';
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import { ApolloClient, InMemoryCache } from "@apollo/client/core";
+import 'flowbite';
 
 
 import App from './App.vue'

@@ -86,7 +86,5 @@ const handleSignInBtnClick = async () => {
 };
 </script>
 <style lang="css" scoped>
-.background-color-19315b {
-  background-color: #19315b;
-}
+
 </style>

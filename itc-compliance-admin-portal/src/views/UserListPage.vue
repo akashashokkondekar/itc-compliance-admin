@@ -6,6 +6,7 @@ import { useAuthStore } from './../stores/auth'
 import { useRouter } from 'vue-router'
 import { AppUtils } from './../utils/AppUtils';
 import { UserRoleEnum, DefaultUserCreationObj } from './../utils/AppConstant';
+import Navbar from './../components/Navbar.vue';
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -56,6 +57,7 @@ const createUser = () => {
 
 <template>
   <div>
+    <navbar></navbar>
     <div v-if="result" class="m-6 overflow-scroll px-0">
 
       <h2 class="text-2xl font-bold mb-4">User List</h2>

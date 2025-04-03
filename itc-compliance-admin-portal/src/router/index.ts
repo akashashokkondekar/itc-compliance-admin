@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import UserListPage from "./../views/UserListPage.vue";
+import AboutUsPage from "./../views/AboutUs.vue";
+import DashboardPage from "./../views/Dashboard.vue";
 import { useAuthStore } from "./../stores/auth";
 import Login from '@/views/Login.vue';
 
@@ -28,6 +30,8 @@ import Login from '@/views/Login.vue';
 const routes = [
   { path: "/", component: Login, meta: { requiresAuth: false } },
   { path: "/users", component: UserListPage, meta: { requiresAuth: true } },
+  { path: "/about-us", component: AboutUsPage, meta: { requiresAuth: true } },
+  { path: "/dashboard", component: DashboardPage, meta: { requiresAuth: true } },
 ];
 
 const router = createRouter({
@@ -47,7 +51,7 @@ router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !authStore.token) {
     next("/");
   } else if (to.path === "/" && authStore.token) {
-    next("/users");
+    next("/dashboard");
   } else {
     next();
   }
