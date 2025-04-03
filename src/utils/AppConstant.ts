@@ -3,10 +3,13 @@ import { toast } from "vue3-toastify";
 // Login
 export const LoginFormHeaderText = "Sign In";
 export const LoginFormHeaderDescText = "If you have an account, please login:";
+export const EmailIdPlaceHolderText = "john.doe@gmail.com";
+export const PasswordPlaceHolderText = "Password";
+export const PostLoginButtonClickText = "Verifying...";
 
 // Server
 export const GenericServerErrorMessageOne = "An error occurred while processing the request. Please try again.";
-export const GenericServerErrorMessageTwo = "Oops! Something went wrong. Please try again. Error Info: {error}";
+export const GenericServerErrorMessageTwo = "Oops! Something went wrong. Please try again.";
 
 // Toast
 export const AutoCloseToastTimeout = 2000; // In ms

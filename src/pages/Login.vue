@@ -9,10 +9,11 @@
         <p class="text-xs mt-4 text-[#002D74]">{{ LoginFormHeaderDescText }}</p>
 
         <form @submit.prevent="handleSignInBtnClick" class="flex flex-col gap-4">
-          <input class="p-2 mt-8 rounded-xl border" type="email" name="email" placeholder="Email" v-model="email">
+          <input class="p-2 mt-8 rounded-xl border" type="email" name="email" :placeholder="EmailIdPlaceHolderText"
+            v-model="email">
           <div class="relative">
             <input class="p-2 rounded-xl border w-full" :type="showPassword ? 'text' : 'password'" name="password"
-              placeholder="Password" v-model="password">
+              :placeholder="PasswordPlaceHolderText" v-model="password">
             <button type="button" @click="togglePassword"
               class="absolute right-3 top-2.5 text-gray-600 focus:outline-none">
               {{ showPassword ? "🙈" : "👁️" }}
@@ -21,7 +22,7 @@
           <button
             :class="{ 'bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300': !disableSignInBtn(), 'bg-[#002D74] rounded-xl text-white py-2 opacity-50 cursor-not-allowed': disableSignInBtn() }"
             :disabled="disableSignInBtn()">
-            {{ loading ? "Logging in..." : LoginFormHeaderText }}
+            {{ loading ? PostLoginButtonClickText : LoginFormHeaderText }}
           </button>
           <p v-if="error" class="text-red-500 text-xs">{{ error.message }}</p>
         </form>
@@ -44,7 +45,7 @@ import { useMutation } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "./../stores/auth";
-import { LoginFormHeaderText, LoginFormHeaderDescText, ToastTypeEnum, GenericServerErrorMessageOne, GenericServerErrorMessageTwo } from "./../utils/AppConstant";
+import { LoginFormHeaderText, LoginFormHeaderDescText, ToastTypeEnum, GenericServerErrorMessageOne, EmailIdPlaceHolderText, PasswordPlaceHolderText, PostLoginButtonClickText, GenericServerErrorMessageTwo } from "./../utils/AppConstant";
 import { AppUtils } from "../utils/AppUtils";
 
 const router = useRouter();
@@ -63,7 +64,7 @@ const passwordError = computed(() => {
 });
 
 const disableSignInBtn = (): boolean => {
-  return (emailError.value || passwordError.value || !loading);
+  return (emailError.value || passwordError.value || loading.value);
 }
 
 const LOGIN_MUTATION = gql`
@@ -98,13 +99,15 @@ const handleSignInBtnClick = async () => {
         authStore.setToken(data.login.token);
         authStore.setUser(data.login.user);
         router.push("/dashboard");
+      } else {
+        AppUtils.showToastMsg(GenericServerErrorMessageTwo, ToastTypeEnum.Error);
       }
     } else {
       AppUtils.showToastMsg(GenericServerErrorMessageOne, ToastTypeEnum.Error);
     }
 
-  } catch (err) { 
-    
+  } catch (err) {
+
   }
 };
 </script>
