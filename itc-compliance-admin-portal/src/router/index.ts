@@ -26,7 +26,7 @@ import Login from '@/views/Login.vue';
 
 
 const routes = [
-  { path: "/", component: Login },
+  { path: "/", component: Login, meta: { requiresAuth: false } },
   { path: "/users", component: UserListPage, meta: { requiresAuth: true } },
 ];
 
@@ -38,8 +38,16 @@ const router = createRouter({
 // Route Guard
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
+  
+  // To Ensure that it's loaded before route change
+  if (!authStore.token) {
+    authStore.loadFromStorage();
+  }
+
   if (to.meta.requiresAuth && !authStore.token) {
     next("/");
+  } else if (to.path === "/" && authStore.token) {
+    next("/users");
   } else {
     next();
   }
