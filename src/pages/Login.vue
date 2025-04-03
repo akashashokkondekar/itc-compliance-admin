@@ -46,13 +46,13 @@ import { useMutation } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "./../stores/auth";
-import { networkStatusStore } from "./../stores/network";
+import { useNetworkStatusStore } from "./../stores/network";
 import { LoginFormHeaderText, LoginFormHeaderDescText, ToastTypeEnum, GenericServerErrorMessageOne, EmailIdPlaceHolderText, PasswordPlaceHolderText, PostLoginButtonClickText, GenericServerErrorMessageTwo, NoInternetConnectionAvailableMsg } from "./../utils/AppConstant";
 import { AppUtils } from "../utils/AppUtils";
 
 const router = useRouter();
 const authStore = useAuthStore();
-const networkStatus = networkStatusStore();
+const networkStatus = useNetworkStatusStore();
 
 const email = ref("");
 const password = ref("");

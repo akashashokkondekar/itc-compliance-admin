@@ -3,10 +3,10 @@
 import LostNetworkInfoStrip from './components/LostNetworkInfoStrip.vue';
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import { useAuthStore } from "./stores/auth";
-import { networkStatusStore } from "./stores/network";
+import { useNetworkStatusStore } from "./stores/network";
 
 const authStore = useAuthStore();
-const networkStatus = networkStatusStore();
+const networkStatus = useNetworkStatusStore();
 const isOnline = ref(navigator.onLine);
 
 // Update network status
