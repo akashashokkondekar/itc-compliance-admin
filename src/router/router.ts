@@ -40,7 +40,7 @@ const router = createRouter({
 });
 
 // Route Guard
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   const authStore = useAuthStore();
   
   // To Ensure that it's loaded before route change

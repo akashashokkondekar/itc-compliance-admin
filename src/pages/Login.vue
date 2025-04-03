@@ -73,18 +73,23 @@ const { mutate: login, loading, error } = useMutation(LOGIN_MUTATION);
 
 const handleSignInBtnClick = async () => {
   try {
-    const { data } = await login({ email: email.value, password: password.value });
 
-    if (data?.login?.token) {
-      authStore.setToken(data.login.token);
-      authStore.setUser(data.login.user);
-      router.push("/users");
+    const result = await login({ email: email.value, password: password.value });
+
+    if (result && result.data) {
+      const { data } = result;
+      if (data?.login?.token) {
+        authStore.setToken(data.login.token);
+        authStore.setUser(data.login.user);
+        router.push("/dashboard");
+      }
+    } else {
+      console.error("Login request failed or returned null.");
     }
+
   } catch (err) {
     console.error("Login failed:", err);
   }
 };
 </script>
-<style lang="css" scoped>
-
-</style>
+<style lang="css" scoped></style>
