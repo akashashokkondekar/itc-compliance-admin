@@ -9,4 +9,11 @@ export enum UserRoleEnum {
   None = 0,
   Admin = 1,
   User = 2
-}
+};
+
+export const DefaultUserCreationObj = {
+  name: "Harry Potter",
+  email: "harry.potter@gmail.com",
+  role: UserRoleEnum.User,
+  password: '4%@qEE'
+};
