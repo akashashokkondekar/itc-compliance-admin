@@ -10,6 +10,7 @@ export const PostLoginButtonClickText = "Verifying...";
 // Server
 export const GenericServerErrorMessageOne = "An error occurred while processing the request. Please try again.";
 export const GenericServerErrorMessageTwo = "Oops! Something went wrong. Please try again.";
+export const NoInternetConnectionAvailableMsg = "You are currently offline. Please check your internet connection.";
 
 // Toast
 export const AutoCloseToastTimeout = 2000; // In ms

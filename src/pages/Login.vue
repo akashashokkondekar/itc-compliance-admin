@@ -40,16 +40,19 @@
 </template>
 
 <script setup lang="ts">
+
 import { ref, computed } from "vue";
 import { useMutation } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "./../stores/auth";
-import { LoginFormHeaderText, LoginFormHeaderDescText, ToastTypeEnum, GenericServerErrorMessageOne, EmailIdPlaceHolderText, PasswordPlaceHolderText, PostLoginButtonClickText, GenericServerErrorMessageTwo } from "./../utils/AppConstant";
+import { networkStatusStore } from "./../stores/network";
+import { LoginFormHeaderText, LoginFormHeaderDescText, ToastTypeEnum, GenericServerErrorMessageOne, EmailIdPlaceHolderText, PasswordPlaceHolderText, PostLoginButtonClickText, GenericServerErrorMessageTwo, NoInternetConnectionAvailableMsg } from "./../utils/AppConstant";
 import { AppUtils } from "../utils/AppUtils";
 
 const router = useRouter();
 const authStore = useAuthStore();
+const networkStatus = networkStatusStore();
 
 const email = ref("");
 const password = ref("");
@@ -64,8 +67,12 @@ const passwordError = computed(() => {
 });
 
 const disableSignInBtn = (): boolean => {
-  return (emailError.value || passwordError.value || loading.value);
+  return (emailError.value || passwordError.value || loading.value || !networkStatus.isOnline);
 }
+
+const togglePassword = (): void => {
+  showPassword.value = !showPassword.value;
+};
 
 const LOGIN_MUTATION = gql`
   mutation Login($email: String!, $password: String!) {
@@ -81,27 +88,31 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-const togglePassword = () => {
-  showPassword.value = !showPassword.value;
-};
-
 const { mutate: login, loading, error } = useMutation(LOGIN_MUTATION);
 
 const handleSignInBtnClick = async () => {
 
   try {
 
-    const result = await login({ email: email.value, password: password.value });
+    if (!networkStatus.isOnline) {
+      AppUtils.showToastMsg(NoInternetConnectionAvailableMsg, ToastTypeEnum.Error);
+      return;
+    }
 
+    const result = await login({ email: email.value, password: password.value });
     if (result && result.data) {
+
       const { data } = result;
       if (data?.login?.token) {
+
         authStore.setToken(data.login.token);
         authStore.setUser(data.login.user);
         router.push("/dashboard");
+
       } else {
         AppUtils.showToastMsg(GenericServerErrorMessageTwo, ToastTypeEnum.Error);
       }
+
     } else {
       AppUtils.showToastMsg(GenericServerErrorMessageOne, ToastTypeEnum.Error);
     }

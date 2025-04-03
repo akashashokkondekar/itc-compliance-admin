@@ -1,18 +1,36 @@
 <script setup lang="ts">
 // import HelloWorld from './components/HelloWorld.vue'
-import { onMounted } from "vue";
+import LostNetworkInfoStrip from './components/LostNetworkInfoStrip.vue';
+import { onMounted, onBeforeUnmount, ref } from "vue";
 import { useAuthStore } from "./stores/auth";
+import { networkStatusStore } from "./stores/network";
 
 const authStore = useAuthStore();
+const networkStatus = networkStatusStore();
+const isOnline = ref(navigator.onLine);
+
+// Update network status
+const updateNetworkStatus = () => {
+  isOnline.value = navigator.onLine
+  networkStatus.setNetworkStatus(isOnline.value);
+};
+
+onBeforeUnmount(() => {
+  window.removeEventListener('online', updateNetworkStatus);
+  window.removeEventListener('offline', updateNetworkStatus);
+});
 
 onMounted(() => {
   authStore.loadFromStorage();
+  window.addEventListener('online', updateNetworkStatus);
+  window.addEventListener('offline', updateNetworkStatus);
 });
 
 </script>
 
 <template>
   <div>
+    <LostNetworkInfoStrip v-if="!isOnline"/>
     <RouterView />
   </div>
   <!-- <HelloWorld msg="Vite + Vue" /> -->
@@ -25,9 +43,11 @@ onMounted(() => {
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
