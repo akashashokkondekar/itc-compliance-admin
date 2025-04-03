@@ -18,7 +18,9 @@
               {{ showPassword ? "🙈" : "👁️" }}
             </button>
           </div>
-          <button class="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300" :disabled="loading">
+          <button
+            :class="{ 'bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300': !disableSignInBtn(), 'bg-[#002D74] rounded-xl text-white py-2 opacity-50 cursor-not-allowed': disableSignInBtn() }"
+            :disabled="disableSignInBtn()">
             {{ loading ? "Logging in..." : LoginFormHeaderText }}
           </button>
           <p v-if="error" class="text-red-500 text-xs">{{ error.message }}</p>
@@ -26,7 +28,6 @@
 
       </div>
 
-      <!-- image -->
       <div class="md:block hidden w-1/2">
         <img class="rounded-2xl"
           src="https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80"
@@ -38,18 +39,32 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useMutation } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "./../stores/auth";
-import { LoginFormHeaderText, LoginFormHeaderDescText } from "./../utils/AppConstant";
+import { LoginFormHeaderText, LoginFormHeaderDescText, ToastTypeEnum, GenericServerErrorMessageOne, GenericServerErrorMessageTwo } from "./../utils/AppConstant";
+import { AppUtils } from "../utils/AppUtils";
 
 const router = useRouter();
+const authStore = useAuthStore();
+
 const email = ref("");
 const password = ref("");
 const showPassword = ref(false);
-const authStore = useAuthStore();
+
+const emailError = computed(() => {
+  return (!email.value || !AppUtils.isValidateEmailAddress(email.value));
+});
+
+const passwordError = computed(() => {
+  return password.value.trim().length === 0;
+});
+
+const disableSignInBtn = (): boolean => {
+  return (emailError.value || passwordError.value || !loading);
+}
 
 const LOGIN_MUTATION = gql`
   mutation Login($email: String!, $password: String!) {
@@ -72,6 +87,7 @@ const togglePassword = () => {
 const { mutate: login, loading, error } = useMutation(LOGIN_MUTATION);
 
 const handleSignInBtnClick = async () => {
+
   try {
 
     const result = await login({ email: email.value, password: password.value });
@@ -84,11 +100,11 @@ const handleSignInBtnClick = async () => {
         router.push("/dashboard");
       }
     } else {
-      console.error("Login request failed or returned null.");
+      AppUtils.showToastMsg(GenericServerErrorMessageOne, ToastTypeEnum.Error);
     }
 
-  } catch (err) {
-    console.error("Login failed:", err);
+  } catch (err) { 
+    
   }
 };
 </script>
