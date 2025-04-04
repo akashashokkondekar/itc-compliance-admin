@@ -47,3 +47,17 @@
     color: #ffffff;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #d2b199;
+  }
+  button {
+    background-color: #19315b;
+    color: #ffffff;
+  }
+}
