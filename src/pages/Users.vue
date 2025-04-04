@@ -4,15 +4,17 @@ import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 import { useAuthStore } from '../stores/auth'
 import { AppUtils } from '../utils/AppUtils';
-import { UserRoleEnum, DefaultUserCreationObj, PostNewUserCreationMsg, ToastTypeEnum, CreateNewUserText, SecondOptionText, UserPageInfoText, NumberOfRecordFoundMsg } from '../utils/AppConstant';
+import CreateUser from './../components/user/CreateUser.vue'
+import { EmitValue } from './../types/Interface'
+import { UserRoleEnum, CreateNewUserText, SecondOptionText, UserPageInfoText, NumberOfRecordFoundMsg, UserOperationEnum } from '../utils/AppConstant';
 import Navbar from '../components/Navbar.vue';
 
 const authStore = useAuthStore()
 
-const newUser = ref(DefaultUserCreationObj);
 const isCreateUserModalOpen = ref(false);
 const searchQuery = ref("");
 const selectedRoleForFilter = ref(-1);
+const filteredUserRoleKeyList = Object.keys(UserRoleEnum).filter(key => isNaN(Number(key)));
 
 const canManageUsers = computed(() => authStore.user?.role === UserRoleEnum.Admin);
 const filteredUsers = computed(() => {
@@ -20,7 +22,6 @@ const filteredUsers = computed(() => {
   return users.filter((user: any) => {
 
     const matchSearch = user.name.toLowerCase().includes(searchQuery.value.toLowerCase()) || user.email.toLowerCase().includes(searchQuery.value.toLowerCase());
-    // console.log(typeof selectedRoleForFilter.value)
     const matchRole = selectedRoleForFilter.value !== -1 ? user.role === selectedRoleForFilter.value : true;
 
     return matchSearch && matchRole;
@@ -29,9 +30,6 @@ const filteredUsers = computed(() => {
 const getTotalUserFoundText = computed(() => {
   return NumberOfRecordFoundMsg.replace("{number_of_users}", (filteredUsers.value.length) > 1 ? `${filteredUsers.value.length} records` : `${filteredUsers.value.length} record`);
 });
-
-
-const filteredUserRoleKeyList = Object.keys(UserRoleEnum).filter(key => isNaN(Number(key)));
 
 const USERS_QUERY = gql`
   query {
@@ -43,22 +41,28 @@ const USERS_QUERY = gql`
     }
   }
 `
-
-// Fetch Data
 const { result, loading, error } = useQuery(USERS_QUERY)
 
 const openCreateUserModal = () => {
   isCreateUserModalOpen.value = true;
 };
 
-const closeCreateUserModal = () => {
-  isCreateUserModalOpen.value = false;
-};
+const handleUserClickAction = (emittedObj: EmitValue): void => {
 
-const createUser = () => {
-  AppUtils.showToastMsg(PostNewUserCreationMsg.replace("{name}", newUser.value.name), ToastTypeEnum.Success);
-  closeCreateUserModal();
-};
+  console.log("&^%$")
+  switch (emittedObj.operationType) {
+
+    default:
+      break;
+
+    case UserOperationEnum.Open_Create_User_Modal:
+    case UserOperationEnum.Close_Create_User_Modal:
+      isCreateUserModalOpen.value = (UserOperationEnum.Open_Create_User_Modal === emittedObj.operationType);
+      break;
+
+  }
+
+}
 
 </script>
 
@@ -90,34 +94,8 @@ const createUser = () => {
         </div>
       </div>
 
-      <!-- Create User Modal -->
-      <div v-if="isCreateUserModalOpen" class="fixed inset-0 flex items-center justify-center">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-          <h2 class="text-xl font-bold mb-4">Create User</h2>
-
-          <label class="block text-gray-700">Name</label>
-          <input v-model="newUser.name" type="text" class="w-full p-2 border rounded-lg mb-2">
-
-          <label class="block text-gray-700">Email</label>
-          <input v-model="newUser.email" type="email" class="w-full p-2 border rounded-lg mb-2">
-
-          <label class="block text-gray-700">Password</label>
-          <input v-model="newUser.password" type="text" class="w-full p-2 border rounded-lg mb-2">
-
-          <label class="block text-gray-700">Role</label>
-          <select v-model="newUser.role" class="w-full p-2 border rounded-lg mb-4">
-            <option v-for="(currRole, index) in filteredUserRoleKeyList" :key="index"
-              :value="AppUtils.getEnumValueFromKeyName(currRole)">
-              {{ AppUtils.getNewRoleNameByKey(currRole) }}
-            </option>
-          </select>
-
-          <div class="flex justify-between">
-            <button @click="closeCreateUserModal" class="px-4 py-2 bg-gray-400 text-white rounded-lg">Cancel</button>
-            <button @click="createUser" class="px-4 py-2 bg-green-500 text-white rounded-lg">Save</button>
-          </div>
-        </div>
-      </div>
+      <CreateUser :filteredUserRoleKeyList="filteredUserRoleKeyList" @performUserClickAction="handleUserClickAction"
+        v-if="isCreateUserModalOpen" />
 
       <div v-if="loading">Loading...</div>
       <div v-if="error" class="text-red-500">{{ error.message }}</div>

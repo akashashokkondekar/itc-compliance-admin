@@ -6,7 +6,7 @@ export const LoginFormHeaderDescText = "If you have an account, please login:";
 export const EmailIdPlaceHolderText = "john.doe@gmail.com";
 export const PasswordPlaceHolderText = "Password";
 export const PostLoginButtonClickText = "Verifying...";
-export const MaxPasswordCharLength = 4;
+export const MinPasswordCharLength = 4;
 
 // General
 export const FeatureUnderDevelopmentInfoText = "This feature is under development.";
@@ -26,7 +26,8 @@ export const UserPageInfoText = "Administrators can add users, while others can 
 export const NumberOfRecordFoundMsg = "{number_of_users} found.";
 
 // CreateUser Modal
-export const PostNewUserCreationMsg = "The user {name} has been created successfully.";
+export const PostNewUserCreationMsg = "The user '{name}' user has been created successfully.";
+export const MinNameCharLength = 4;
 
 // NavBar
 export const FirstOptionText = "Dashboard";
@@ -71,7 +72,9 @@ export enum UserOperationEnum {
   Open_Dashboard = 1,
   Open_Settings = 2,
   Open_AboutUs = 3,
-  Handle_Signout = 4
+  Handle_Signout = 4,
+  Open_Create_User_Modal = 5,
+  Close_Create_User_Modal = 6
 };
 
 export const DefaultUserCreationObj = {

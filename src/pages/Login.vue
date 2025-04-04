@@ -47,7 +47,7 @@ import gql from "graphql-tag";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "./../stores/auth";
 import { useNetworkStatusStore } from "./../stores/network";
-import { LoginFormHeaderText, LoginFormHeaderDescText, ToastTypeEnum, GenericServerErrorMessageOne, EmailIdPlaceHolderText, PasswordPlaceHolderText, PostLoginButtonClickText, GenericServerErrorMessageTwo, NoInternetConnectionAvailableMsg, MaxPasswordCharLength } from "./../utils/AppConstant";
+import { LoginFormHeaderText, LoginFormHeaderDescText, ToastTypeEnum, GenericServerErrorMessageOne, EmailIdPlaceHolderText, PasswordPlaceHolderText, PostLoginButtonClickText, GenericServerErrorMessageTwo, NoInternetConnectionAvailableMsg, MinPasswordCharLength } from "./../utils/AppConstant";
 import { AppUtils } from "../utils/AppUtils";
 
 const router = useRouter();
@@ -63,7 +63,7 @@ const emailError = computed(() => {
 });
 
 const passwordError = computed(() => {
-  return password.value.trim().length < MaxPasswordCharLength;
+  return password.value.trim().length < MinPasswordCharLength;
 });
 
 const disableSignInBtn = (): boolean => {
