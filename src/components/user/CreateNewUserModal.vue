@@ -35,10 +35,10 @@
 </template>
 <script setup lang="ts">
 import { ref, computed, defineProps, defineEmits } from "vue";
-import { AppUtils } from './../../utils/AppUtils';
-import { DefaultUserCreationObj, MinPasswordCharLength, MinNameCharLength, PostNewUserCreationMsg, ToastTypeEnum, UserOperationEnum, NoInternetConnectionAvailableMsg, NameInputLabelText, NameInputPlaceHolderText, EmailInputLabelText, EmailIdPlaceHolderText, PasswordInputLabelText, PasswordInputPlaceHolderText, RoleInputLabelText, CloseCreateNewUserModalBtnText, CreateUserBtnText } from './../../utils/AppConstant';
+import { AppUtils } from '../../utils/AppUtils';
+import { DefaultUserCreationObj, MinPasswordCharLength, MinNameCharLength, PostNewUserCreationMsg, ToastTypeEnum, UserOperationEnum, NoInternetConnectionAvailableMsg, NameInputLabelText, NameInputPlaceHolderText, EmailInputLabelText, EmailIdPlaceHolderText, PasswordInputLabelText, PasswordInputPlaceHolderText, RoleInputLabelText, CloseCreateNewUserModalBtnText, CreateUserBtnText } from '../../utils/AppConstant';
 import type { DefaultUserObj, EmitValue } from "../../types/Interface";
-import { useNetworkStatusStore } from "./../../stores/network";
+import { useNetworkStatusStore } from "../../stores/network";
 
 defineProps<{ filteredUserRoleKeyList: any }>()
 const emit = defineEmits<{

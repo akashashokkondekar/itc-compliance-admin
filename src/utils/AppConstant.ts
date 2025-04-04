@@ -24,6 +24,10 @@ export const DummyTeamInfoArr = [
 export const CreateNewUserText = "+ Create User";
 export const UserPageInfoText = "Administrators can add users, while others can search and view users by name, email, or role.";
 export const NumberOfRecordFoundMsg = "{number_of_users} found.";
+export const FirstColumnHeaderText = "SR. No.";
+export const SecondColumnHeaderText = "Role";
+export const ThirdColumnHeaderText = "User Information";
+export const AllRoleSelectOptionText = "All Roles";
 
 // CreateUser Modal
 export const CloseCreateNewUserModalBtnText = "Close";
@@ -87,6 +91,7 @@ export enum UserOperationEnum {
 };
 
 export const DefaultUserCreationObj = {
+  id: "45T88-34DFs-hhedd$-yt123",
   name: "Harry Potter",
   email: "harry.potter@gmail.com",
   role: UserRoleEnum.User,
