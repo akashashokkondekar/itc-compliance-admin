@@ -1,6 +1,6 @@
 <template>
   <main>
-    <Navbar />
+    <Navbar :preLoginScreen="false"/>
   </main>
   <section class="bg-gray-100 min-h-screen flex flex-col items-center p-6">
 

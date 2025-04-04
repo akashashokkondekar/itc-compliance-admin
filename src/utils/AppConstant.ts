@@ -23,7 +23,7 @@ export const DummyTeamInfoArr = [
 // User
 export const CreateNewUserText = "+ Create User";
 export const UserPageInfoText = "Administrators can add users, while others can search and view users by name, email, or role.";
-export const NumberOfRecordFoundMsg = "{number_of_users} found.";
+export const NumberOfRecordFoundMsg = "Total {number_of_users} found.";
 export const FirstColumnHeaderText = "SR. No.";
 export const SecondColumnHeaderText = "Role";
 export const ThirdColumnHeaderText = "User Information";
