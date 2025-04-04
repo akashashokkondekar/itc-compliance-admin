@@ -1,19 +1,21 @@
 <template>
 
-  <div class="fixed inset-0 flex items-center justify-center">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-      <h2 class="text-xl font-bold mb-4">Create User</h2>
+  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-10 rounded-lg shadow-lg w-130">
 
-      <label class="block text-gray-700">Name</label>
-      <input v-model="newUser.name" type="text" class="w-full p-2 border rounded-lg mb-2">
+      <label class="block text-sm text-gray-700">{{ NameInputLabelText }}</label>
+      <input v-model="newUser.name" type="text" :placeholder="NameInputPlaceHolderText"
+        class="w-full p-2 border rounded-lg mb-2">
 
-      <label class="block text-gray-700">Email</label>
-      <input v-model="newUser.email" type="email" class="w-full p-2 border rounded-lg mb-2">
+      <label class="block pt-3 text-sm text-gray-700">{{ EmailInputLabelText }}</label>
+      <input v-model="newUser.email" type="email" :placeholder="EmailIdPlaceHolderText"
+        class="w-full p-2 border rounded-lg mb-2">
 
-      <label class="block text-gray-700">Password</label>
-      <input v-model="newUser.password" type="text" class="w-full p-2 border rounded-lg mb-2">
+      <label class="block pt-3 text-sm text-gray-700">{{ PasswordInputLabelText }}</label>
+      <input v-model="newUser.password" type="text" :placeholder="PasswordInputPlaceHolderText"
+        class="w-full p-2 border rounded-lg mb-2">
 
-      <label class="block text-gray-700">Role</label>
+      <label class="block pt-3 text-sm text-gray-700">{{ RoleInputLabelText }}</label>
       <select v-model="newUser.role" class="w-full p-2 border rounded-lg mb-4">
         <option v-for="(currRole, index) in filteredUserRoleKeyList" :key="index"
           :value="AppUtils.getEnumValueFromKeyName(currRole)">
@@ -21,11 +23,11 @@
         </option>
       </select>
 
-      <div class="flex justify-between">
-        <button @click="closeCreateUserModal" class="px-4 py-2 bg-gray-400 text-white rounded-lg">Cancel</button>
+      <div class="flex pt-4 justify-center">
+        <button @click="closeCreateUserModal" class="px-4 py-2 cancel-btn-styling cursor-pointer mr-3 rounded-lg">{{ CloseCreateNewUserModalBtnText }}</button>
         <button @click="createUser"
           :class="{ 'px-4 py-2 rounded-lg': !disableCreateBtn(), 'px-4 py-2 rounded-lg opacity-50 cursor-not-allowed': disableCreateBtn() }"
-          :disabled="disableCreateBtn()">Save</button>
+          :disabled="disableCreateBtn()">{{ CreateUserBtnText }}</button>
       </div>
     </div>
   </div>
@@ -34,7 +36,7 @@
 <script setup lang="ts">
 import { ref, computed, defineProps, defineEmits } from "vue";
 import { AppUtils } from './../../utils/AppUtils';
-import { DefaultUserCreationObj, MinPasswordCharLength, MinNameCharLength, PostNewUserCreationMsg, ToastTypeEnum, UserOperationEnum, NoInternetConnectionAvailableMsg } from './../../utils/AppConstant';
+import { DefaultUserCreationObj, MinPasswordCharLength, MinNameCharLength, PostNewUserCreationMsg, ToastTypeEnum, UserOperationEnum, NoInternetConnectionAvailableMsg, NameInputLabelText, NameInputPlaceHolderText, EmailInputLabelText, EmailIdPlaceHolderText, PasswordInputLabelText, PasswordInputPlaceHolderText, RoleInputLabelText, CloseCreateNewUserModalBtnText, CreateUserBtnText } from './../../utils/AppConstant';
 import type { DefaultUserObj, EmitValue } from "../../types/Interface";
 import { useNetworkStatusStore } from "./../../stores/network";
 
@@ -90,3 +92,15 @@ const closeCreateUserModal = () => {
 };
 
 </script>
+
+<style lang="css" scoped>
+.bg-black {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.cancel-btn-styling {
+  background-color: white !important;
+  color: #19315b !important;
+  border: 0.5px solid #19315b !important;
+}
+</style>

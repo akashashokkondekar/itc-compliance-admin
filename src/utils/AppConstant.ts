@@ -26,8 +26,16 @@ export const UserPageInfoText = "Administrators can add users, while others can 
 export const NumberOfRecordFoundMsg = "{number_of_users} found.";
 
 // CreateUser Modal
+export const CloseCreateNewUserModalBtnText = "Close";
+export const NameInputLabelText = "Name:";
+export const NameInputPlaceHolderText = "John Doe";
+export const EmailInputLabelText = "Email:";
+export const PasswordInputLabelText = "Password:";
+export const PasswordInputPlaceHolderText = `Requires minimum ${MinPasswordCharLength} character`;
+export const RoleInputLabelText = "Role:";
 export const PostNewUserCreationMsg = "The user '{name}' user has been created successfully.";
 export const MinNameCharLength = 4;
+export const CreateUserBtnText = "Create";
 
 // NavBar
 export const FirstOptionText = "Dashboard";
