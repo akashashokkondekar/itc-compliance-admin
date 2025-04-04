@@ -173,6 +173,15 @@ const createUser = () => {
           </tr>
         </tbody>
       </table>
+
+      <div v-if="canManageUsers" class="fixed bottom-6 right-6 z-50">
+      <button
+        @click="openCreateUserModal"
+        class="hover:scale-105 duration-300 text-white px-6 py-3 rounded-full shadow-lg text-sm transition-all"
+      >
+        + Create User
+      </button>
+    </div>
     </div>
   </div>
 </template>
