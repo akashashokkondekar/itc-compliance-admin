@@ -28,12 +28,19 @@ export const FirstColumnHeaderText = "SR. No.";
 export const SecondColumnHeaderText = "Role";
 export const ThirdColumnHeaderText = "User Information";
 export const AllRoleSelectOptionText = "All Roles";
+
+// Pagination Setting
 export const RecordsPerPage = 10;
 export const MaxPageNumberToShowCount = 1;
 export const HideNextPrevBtnWhenEnds = true; 
 export const DisableBreakPointBtns = true;
 
-// CreateUser Modal
+// NotFound
+export const NotFoundErrorHeaderText = "404";
+export const ContentNotFoundText="Opsss...page not found.";
+export const BackToHomeOptionText = "Back to Home";
+
+// CreateNewUser Modal
 export const CloseCreateNewUserModalBtnText = "Close";
 export const NameInputLabelText = "Name:";
 export const NameInputPlaceHolderText = "John Doe";
