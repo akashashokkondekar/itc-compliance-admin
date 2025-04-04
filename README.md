@@ -63,12 +63,12 @@ git clone https://github.com/akashashokkondekar/itc-compliance-admin.git
 cd <project-folder>
 ```
 
-2.**Pull all branches** from the origin:
+3.**Pull all branches** from the origin:
    ```bash
    git fetch --all
    ```
 
-3.**Switch to the Deployment/Prod or main branch:**
+4.**Switch to the Deployment/Prod or main branch:**
   ```bash
   git checkout Deployment/Prod
   ```
@@ -77,17 +77,17 @@ or
 git checkout main
 ```
 
-4.**Install dependencies:** Ensure you are using **Node.js v18.20.0** and **npm v10.5.0** or above versions. (Use nvm or a similar version manager if needed).
+5.**Install dependencies:** Ensure you are using **Node.js v18.20.0** and **npm v10.5.0** or above versions. (Use nvm or a similar version manager if needed).
   ```bash
   npm install
   ```
-5.**Run the development server:**
+6.**Run the development server:**
 ```bash
   npm run dev
   ```
 The application should now be running at **http://localhost:5173**.
 
-6.**Sign in using the following credentials:**
+7.**Sign in using the following credentials:**
 - For _Administrator_ role:
   - Username: akash@gmail.com
   - Password (For Deployment/Prod and main branch): A!s2D%
@@ -131,7 +131,7 @@ The application should now be running at **http://localhost:5173**.
   }
 }
 ```
-## Run Both Applications (Admin Portal and Mock GraphQL Server):
+## Run Both Applications (Admin Portal and GraphQL Mock Server):
 Remember, both the Admin Portal and GraphQL Mock Server must be running simultaneously for the portal to function correctly.
 
 ## Additional Information:
