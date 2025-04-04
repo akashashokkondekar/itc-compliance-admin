@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import { FirstColumnHeaderText, SecondColumnHeaderText, ThirdColumnHeaderText } from '../../utils/AppConstant';
+
+</script>
+
 <template>
   <div>
     <table class="mt-4 w-full min-w-max table-fixed text-left">
@@ -20,7 +25,27 @@
           </th>
         </tr>
       </thead>
-      <tbody>
+
+      <tbody class="opacity-60 pointer-events-none">
+        <tr v-for="number in 5" :key="number">
+
+          <td class="p-4 border-b border-blue-gray-50">
+            <div class="h-4 w-6 bg-gray-300 rounded animate-pulse"></div>
+          </td>
+
+          <td class="p-4 border-b border-blue-gray-50">
+            <div class="h-6 w-40 bg-gray-300 rounded-md animate-pulse"></div>
+          </td>
+
+          <td class="p-4 border-b border-blue-gray-50">
+            <div class="space-y-2">
+              <div class="h-4 w-45 bg-gray-300 rounded animate-pulse"></div>
+              <div class="h-3 w-60 bg-gray-200 rounded animate-pulse"></div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <!-- <tbody>
         <tr v-for="(user, index) in paginatedUsers" :key="user.id">
           <td class="p-4 border-b border-blue-gray-50">
             <p class="antialiased font-sans text-sm text-blue-gray-900 font-normal">
@@ -50,70 +75,7 @@
             </div>
           </td>
         </tr>
-      </tbody>
+      </tbody> -->
     </table>
-
-    <div class="mt-4 pb-5 flex justify-center" v-if="filteredUsers.length !== 0">
-      <vue-awesome-paginate :total-items="filteredUsers.length" :items-per-page="RecordsPerPage"
-        :hidePrevNextWhenEnds="HideNextPrevBtnWhenEnds" :disable-breakpoint-buttons="DisableBreakPointBtns"
-        :max-pages-shown="MaxPageNumberToShowCount" v-model="currentPage" @click="handlePaginationClick" />
-    </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { computed, ref, watch } from 'vue';
-import { DisableBreakPointBtns, FirstColumnHeaderText, HideNextPrevBtnWhenEnds, MaxPageNumberToShowCount, RecordsPerPage, SecondColumnHeaderText, ThirdColumnHeaderText, UserRoleEnum } from '../../utils/AppConstant';
-import { AppUtils } from '../../utils/AppUtils';
-import type { UserList } from '../../types/Interface';
-
-const props = defineProps<{ filteredUsers: UserList }>();
-
-const currentPage = ref<number>(1);
-
-const paginatedUsers = computed(() => {
-  const start = (currentPage.value - 1) * RecordsPerPage;
-  const end = start + RecordsPerPage;
-  return props.filteredUsers.slice(start, end);
-});
-
-watch(() => props.filteredUsers, () => {
-  currentPage.value = 1;
-}, { deep: true }
-);
-
-const handlePaginationClick = (page: number) => {
-  currentPage.value = page;
-};
-</script>
-
-<style>
-.pagination-container {
-  display: flex;
-  column-gap: 10px;
-}
-
-.paginate-buttons {
-  height: 40px;
-  width: 40px;
-  border-radius: 20px;
-  cursor: pointer;
-  background-color: rgb(242, 242, 242);
-  border: 1px solid rgb(217, 217, 217);
-  color: black;
-}
-
-.paginate-buttons:hover {
-  background-color: #d8d8d8;
-}
-
-.active-page {
-  background-color: #19315b;
-  border: 1px solid #19315b;
-  color: white;
-}
-
-.active-page:hover {
-  background-color: #19315b;
-}
-</style>

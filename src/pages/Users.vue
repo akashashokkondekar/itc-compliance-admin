@@ -10,6 +10,7 @@ import UserList from "../components/user/UserList.vue";
 import { UserRoleEnum, NumberOfRecordFoundMsg, UserOperationEnum } from '../utils/AppConstant';
 import Navbar from '../components/global/Navbar.vue';
 import FilterBar from './../components/user/FilterBar.vue';
+import TableSkeleton from "../components/user/TableSkeleton.vue";
 
 const authStore = useAuthStore()
 
@@ -66,24 +67,12 @@ const handleUserClickAction = (emittedObj: EmitValue): void => {
 
 <template>
   <div>
-    <Navbar :preLoginScreen="false"/>
-    <div v-if="loading">Loading...</div>
+    <Navbar :preLoginScreen="false" />
     <div v-if="error" class="text-red-500">{{ error.message }}</div>
-
-    <div v-if="result" class="m-6 overflow-scroll px-0">
-
-      <FilterBar v-model:searchQuery="searchQuery" v-model:selectedRoleForFilter="selectedRoleForFilter"
-        :getTotalUserFoundText="getTotalUserFoundText" :filteredUserRoleKeyList="filteredUserRoleKeyList"
-        @performUserClickAction="handleUserClickAction" />
-
-      <UserList :filteredUsers="filteredUsers" class="overflow-x-auto" />
-
-    </div>
-
-    <CreateNewUser :filteredUserRoleKeyList="filteredUserRoleKeyList" @performUserClickAction="handleUserClickAction"
-      v-if="isCreateUserModalOpen" />
-
-    <CreateNewUserButton v-if="canManageUsers && !isCreateUserModalOpen" @performUserClickAction="handleUserClickAction"
-      class="fixed bottom-6 right-6 z-50" />
+    <FilterBar v-model:searchQuery="searchQuery" v-model:selectedRoleForFilter="selectedRoleForFilter" :getTotalUserFoundText="getTotalUserFoundText" :filteredUserRoleKeyList="filteredUserRoleKeyList" @performUserClickAction="handleUserClickAction" class="m-6 overflow-scroll px-0"/>
+    <UserList :filteredUsers="filteredUsers" v-if="result" class="m-6 overflow-scroll px-0 overflow-x-auto" />
+    <TableSkeleton v-if="loading" class="m-6 overflow-scroll px-0 overflow-x-auto"/>
+    <CreateNewUser :filteredUserRoleKeyList="filteredUserRoleKeyList" @performUserClickAction="handleUserClickAction" v-if="isCreateUserModalOpen" />
+    <CreateNewUserButton v-if="canManageUsers && !isCreateUserModalOpen" @performUserClickAction="handleUserClickAction" class="fixed bottom-6 right-6 z-50" />
   </div>
 </template>

@@ -10,3 +10,5 @@ export interface DefaultUserObj {
   role: number,
   password: string
 }
+
+export type UserList = DefaultUserObj[];
