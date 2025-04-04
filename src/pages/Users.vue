@@ -76,12 +76,14 @@ const handleUserClickAction = (emittedObj: EmitValue): void => {
         :getTotalUserFoundText="getTotalUserFoundText" :filteredUserRoleKeyList="filteredUserRoleKeyList"
         @performUserClickAction="handleUserClickAction" />
 
-      <CreateNewUser :filteredUserRoleKeyList="filteredUserRoleKeyList" @performUserClickAction="handleUserClickAction"
-        v-if="isCreateUserModalOpen" />
-
       <UserList :filteredUsers="filteredUsers" class="overflow-x-auto" />
-      <CreateNewUserButton v-if="canManageUsers && !isCreateUserModalOpen"
-        @performUserClickAction="handleUserClickAction" class="fixed bottom-6 right-6 z-50" />
+
     </div>
+
+    <CreateNewUser :filteredUserRoleKeyList="filteredUserRoleKeyList" @performUserClickAction="handleUserClickAction"
+      v-if="isCreateUserModalOpen" />
+
+    <CreateNewUserButton v-if="canManageUsers && !isCreateUserModalOpen" @performUserClickAction="handleUserClickAction"
+      class="fixed bottom-6 right-6 z-50" />
   </div>
 </template>
