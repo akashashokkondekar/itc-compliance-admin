@@ -30,6 +30,10 @@
   color: #d2b199;
 }
 
+.text-19315b {
+  color: #19315b;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
