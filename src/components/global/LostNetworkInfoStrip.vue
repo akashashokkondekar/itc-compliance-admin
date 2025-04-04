@@ -5,6 +5,6 @@
 </template>
 
 <script setup lang="ts">
-import { NoInternetConnectionAvailableMsg } from '../utils/AppConstant';
+import { NoInternetConnectionAvailableMsg } from './../../utils/AppConstant';
 
 </script>

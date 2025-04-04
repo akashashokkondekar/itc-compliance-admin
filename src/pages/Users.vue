@@ -7,7 +7,7 @@ import { AppUtils } from '../utils/AppUtils';
 import CreateUser from './../components/user/CreateUser.vue'
 import { EmitValue } from './../types/Interface'
 import { UserRoleEnum, CreateNewUserText, SecondOptionText, UserPageInfoText, NumberOfRecordFoundMsg, UserOperationEnum } from '../utils/AppConstant';
-import Navbar from '../components/Navbar.vue';
+import Navbar from '../components/global/Navbar.vue';
 
 const authStore = useAuthStore()
 

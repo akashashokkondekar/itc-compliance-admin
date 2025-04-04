@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // import HelloWorld from './components/HelloWorld.vue'
-import LostNetworkInfoStrip from './components/LostNetworkInfoStrip.vue';
+import LostNetworkInfoStrip from './components/global/LostNetworkInfoStrip.vue';
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import { useAuthStore } from "./stores/auth";
 import { useNetworkStatusStore } from "./stores/network";

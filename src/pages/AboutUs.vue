@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { AboutUsInitialIntroText, DummyTeamInfoArr, ThirdOptionText } from '../utils/AppConstant';
-import Navbar from './../components/Navbar.vue';
+import Navbar from '../components/global/Navbar.vue';
 import { ref } from "vue";
 
 const team = ref(DummyTeamInfoArr);

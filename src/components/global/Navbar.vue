@@ -3,7 +3,7 @@
     <div class="flex flex-wrap items-center justify-between mx-auto p-4">
       <RouterLink to="/dashboard" class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="https://www.itccompliance.com/img/itc_logo.7fa7c0aa.svg" class="h-8" alt="ITC Logo" />
-        <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Admin Portal</span>
+        <span class="self-center text-2xl font-light whitespace-nowrap text-white">{{ AdminIntroHeaderText }}</span>
       </RouterLink>
 
       <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -67,9 +67,9 @@
 import { onMounted } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import { Dropdown } from 'flowbite';
-import { useAuthStore } from "./../stores/auth";
-import { FeatureUnderDevelopmentInfoText, FifthOptionText, FirstOptionText, FourthOptionText, SecondOptionText, ThirdOptionText, ToastTypeEnum, UserOperationEnum } from '../utils/AppConstant';
-import { AppUtils } from '../utils/AppUtils';
+import { useAuthStore } from "../../stores/auth";
+import { AdminIntroHeaderText, FeatureUnderDevelopmentInfoText, FifthOptionText, FirstOptionText, FourthOptionText, SecondOptionText, ThirdOptionText, ToastTypeEnum, UserOperationEnum } from '../../utils/AppConstant';
+import { AppUtils } from '../../utils/AppUtils';
 import { useRouter } from 'vue-router';
 
 const route = useRoute();

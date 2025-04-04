@@ -43,6 +43,7 @@ export const SecondOptionText = "Users";
 export const ThirdOptionText = "About Us";
 export const FourthOptionText = "Settings";
 export const FifthOptionText = "Sign out";
+export const AdminIntroHeaderText = "Admin Portal";
 
 // Server
 export const GenericServerErrorMessageOne = "An error occurred while processing the request. Please try again.";
