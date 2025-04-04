@@ -30,9 +30,9 @@
           <td class="p-4 border-b border-blue-gray-50">
             <div class="w-max">
               <div :class="{
-                'bg-red-500/20 text-red-600': parseInt(user.role) === UserRoleEnum.None,
-                'bg-yellow-500/20 text-yellow-600': parseInt(user.role) === UserRoleEnum.User,
-                'bg-green-500/20 text-green-600': parseInt(user.role) === UserRoleEnum.Admin
+                'bg-red-500/20 text-red-600': user.role === UserRoleEnum.None,
+                'bg-yellow-500/20 text-yellow-600': user.role === UserRoleEnum.User,
+                'bg-green-500/20 text-green-600': user.role === UserRoleEnum.Admin
               }"
                 class="grid items-center font-sans font-bold uppercase whitespace-nowrap select-none py-1 px-2 text-xs rounded-md">
                 <span>{{ AppUtils.getRoleName(user.role) }}</span>
@@ -63,10 +63,11 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
-import type { UserList } from '../../types/Interface';
 import { DisableBreakPointBtns, FirstColumnHeaderText, HideNextPrevBtnWhenEnds, MaxPageNumberToShowCount, RecordsPerPage, SecondColumnHeaderText, ThirdColumnHeaderText, UserRoleEnum } from '../../utils/AppConstant';
 import { AppUtils } from '../../utils/AppUtils';
+import type { DefaultUserObj } from '../../types/Interface';
 
+export type UserList = DefaultUserObj[];
 const props = defineProps<{ filteredUsers: UserList }>();
 
 const currentPage = ref<number>(1);

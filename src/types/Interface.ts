@@ -10,7 +10,3 @@ export interface DefaultUserObj {
   role: number,
   password: string
 }
-
-export interface UserList {
-  user: DefaultUserObj
-}
