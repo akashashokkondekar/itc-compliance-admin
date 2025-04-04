@@ -15,12 +15,12 @@
             <input class="p-2 rounded-xl border w-full" :type="showPassword ? 'text' : 'password'" name="password"
               :placeholder="PasswordPlaceHolderText" v-model="password">
             <button type="button" @click="togglePassword"
-              class="absolute right-3 top-2.5 text-gray-600 focus:outline-none">
+              class="absolute right-3 top-2.5 background-color-transparent focus:outline-none">
               {{ showPassword ? "🙈" : "👁️" }}
             </button>
           </div>
           <button
-            :class="{ 'bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300': !disableSignInBtn(), 'bg-[#002D74] rounded-xl text-white py-2 opacity-50 cursor-not-allowed': disableSignInBtn() }"
+            :class="{ 'rounded-xl py-2 hover:scale-105 duration-300': !disableSignInBtn(), 'rounded-xl py-2 opacity-50 cursor-not-allowed': disableSignInBtn() }"
             :disabled="disableSignInBtn()">
             {{ loading ? PostLoginButtonClickText : LoginFormHeaderText }}
           </button>
@@ -47,7 +47,7 @@ import gql from "graphql-tag";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "./../stores/auth";
 import { useNetworkStatusStore } from "./../stores/network";
-import { LoginFormHeaderText, LoginFormHeaderDescText, ToastTypeEnum, GenericServerErrorMessageOne, EmailIdPlaceHolderText, PasswordPlaceHolderText, PostLoginButtonClickText, GenericServerErrorMessageTwo, NoInternetConnectionAvailableMsg } from "./../utils/AppConstant";
+import { LoginFormHeaderText, LoginFormHeaderDescText, ToastTypeEnum, GenericServerErrorMessageOne, EmailIdPlaceHolderText, PasswordPlaceHolderText, PostLoginButtonClickText, GenericServerErrorMessageTwo, NoInternetConnectionAvailableMsg, MaxPasswordCharLength } from "./../utils/AppConstant";
 import { AppUtils } from "../utils/AppUtils";
 
 const router = useRouter();
@@ -63,7 +63,7 @@ const emailError = computed(() => {
 });
 
 const passwordError = computed(() => {
-  return password.value.trim().length === 0;
+  return password.value.trim().length < MaxPasswordCharLength;
 });
 
 const disableSignInBtn = (): boolean => {

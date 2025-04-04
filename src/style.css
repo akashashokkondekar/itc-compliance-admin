@@ -34,15 +34,20 @@
   color: #19315b;
 }
 
+.background-color-transparent {
+  background-color: transparent;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #d2b199;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #19315b;
+    color: #ffffff;
   }
 }

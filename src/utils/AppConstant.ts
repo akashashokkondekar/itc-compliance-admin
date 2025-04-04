@@ -6,6 +6,7 @@ export const LoginFormHeaderDescText = "If you have an account, please login:";
 export const EmailIdPlaceHolderText = "john.doe@gmail.com";
 export const PasswordPlaceHolderText = "Password";
 export const PostLoginButtonClickText = "Verifying...";
+export const MaxPasswordCharLength = 4;
 
 // General
 export const FeatureUnderDevelopmentInfoText = "This feature is under development.";
@@ -18,6 +19,9 @@ export const DummyTeamInfoArr = [
   { id: 3, name: "Katharina Johnson", role: "Lead Designer", info: 'One of the villagers, Kristina Halvorson from Adaptive Path, holds steadfastly to the notion that design can’t be tested without real content', image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 4, name: "Bob Williams", role: "Software Engineer", info: 'you still use Lorem Ipsum and rightly so, as it will always have a place in the web workers toolbox, as things happen, not always the way you like it.', image: "https://plus.unsplash.com/premium_photo-1671656349218-5218444643d8?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
 ]
+
+// CreateUser Modal
+export const PostNewUserCreationMsg = "The user {name} has been created successfully.";
 
 // NavBar
 export const FirstOptionText = "Dashboard";

@@ -22,9 +22,8 @@
             <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{ authStore?.user?.email }}</span>
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
-            <li>
-              <RouterLink to="/dashboard" class="block px-4 py-2 text-sm text-black-700 hover:bg-gray-100"> {{ FirstOptionText }}
-              </RouterLink>
+            <li class="block px-4 py-2 cursor-pointer text-sm text-black-700 hover:bg-gray-100"
+              @click="handleUserClick(UserOperationEnum.Open_Dashboard)">{{ FirstOptionText }}
             </li>
             <li class="block px-4 py-2 cursor-pointer text-sm text-black-700 hover:bg-gray-100"
               @click="handleUserClick(UserOperationEnum.Open_Settings)">{{ FourthOptionText }}
@@ -100,6 +99,10 @@ const handleUserClick = (selectedUserActionEnum: number): void => {
   switch (selectedUserActionEnum) {
 
     default:
+      break;
+
+    case UserOperationEnum.Open_Dashboard:
+      router.push('/dashboard');
       break;
 
     case UserOperationEnum.Open_Settings:

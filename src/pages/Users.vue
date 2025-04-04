@@ -5,7 +5,7 @@ import gql from 'graphql-tag'
 import { useAuthStore } from '../stores/auth'
 import { useRouter } from 'vue-router'
 import { AppUtils } from '../utils/AppUtils';
-import { UserRoleEnum, DefaultUserCreationObj } from '../utils/AppConstant';
+import { UserRoleEnum, DefaultUserCreationObj, PostNewUserCreationMsg, ToastTypeEnum } from '../utils/AppConstant';
 import Navbar from '../components/Navbar.vue';
 
 const router = useRouter()
@@ -49,7 +49,7 @@ const closeCreateUserModal = () => {
 };
 
 const createUser = () => {
-  // toast.success(`User ${newUser.value.name} created successfully!`);
+  AppUtils.showToastMsg(PostNewUserCreationMsg.replace("{name}", newUser.value.name), ToastTypeEnum.Success);
   closeCreateUserModal();
 };
 
