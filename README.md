@@ -53,7 +53,7 @@ Coming soon...
 1.**Set up GraphQL Mock Server:**
 Before running the admin portal, you need to set up the GraphQL Mock Server to handle the API requests. This mock server is essential for the application to work since it serves the user data and login API responses.
 
-Clone the GraphQL Mock Server repository and follow its setup instructions.
+Clone the GraphQL Mock Server repository [Link: https://github.com/akashashokkondekar/mock-graphql-server.git] and follow its setup instructions.
 
 Once the mock server is running, you can proceed with the next steps.
 
