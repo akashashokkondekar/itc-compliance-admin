@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// import HelloWorld from './components/HelloWorld.vue'
 import LostNetworkInfoStrip from './components/global/LostNetworkInfoStrip.vue';
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import { useAuthStore } from "./stores/auth";
@@ -33,7 +32,6 @@ onMounted(() => {
     <LostNetworkInfoStrip v-if="!isOnline"/>
     <RouterView />
   </div>
-  <!-- <HelloWorld msg="Vite + Vue" /> -->
 </template>
 
 <style scoped>
