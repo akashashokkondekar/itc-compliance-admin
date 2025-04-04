@@ -28,6 +28,10 @@ export const FirstColumnHeaderText = "SR. No.";
 export const SecondColumnHeaderText = "Role";
 export const ThirdColumnHeaderText = "User Information";
 export const AllRoleSelectOptionText = "All Roles";
+export const RecordsPerPage = 10;
+export const MaxPageNumberToShowCount = 1;
+export const HideNextPrevBtnWhenEnds = true; 
+export const DisableBreakPointBtns = true;
 
 // CreateUser Modal
 export const CloseCreateNewUserModalBtnText = "Close";

@@ -7,7 +7,8 @@ import { ApolloClient, InMemoryCache } from "@apollo/client/core";
 import 'flowbite';
 import Toast from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
-
+import VueAwesomePaginate from "vue-awesome-paginate";
+import "vue-awesome-paginate/dist/style.css";
 import App from './App.vue'
 import router from './router/router'
 
@@ -24,6 +25,7 @@ const app = createApp({
 });
 
 app.use(Toast);
+app.use(VueAwesomePaginate);
 app.provide("$toast", Toast);
 app.use(router);
 app.use(createPinia());
