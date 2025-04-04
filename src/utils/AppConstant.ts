@@ -22,6 +22,8 @@ export const DummyTeamInfoArr = [
 
 // User
 export const CreateNewUserText = "+ Create User";
+export const UserPageInfoText = "Administrators can add users, while participants can search and view users by name, email, or role.";
+export const NumberOfRecordFoundMsg = "{number_of_users} found.";
 
 // CreateUser Modal
 export const PostNewUserCreationMsg = "The user {name} has been created successfully.";

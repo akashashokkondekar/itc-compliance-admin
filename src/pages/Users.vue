@@ -3,18 +3,33 @@ import { ref, computed } from "vue";
 import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 import { useAuthStore } from '../stores/auth'
-import { useRouter } from 'vue-router'
 import { AppUtils } from '../utils/AppUtils';
-import { UserRoleEnum, DefaultUserCreationObj, PostNewUserCreationMsg, ToastTypeEnum } from '../utils/AppConstant';
+import { UserRoleEnum, DefaultUserCreationObj, PostNewUserCreationMsg, ToastTypeEnum, CreateNewUserText, SecondOptionText, UserPageInfoText, NumberOfRecordFoundMsg } from '../utils/AppConstant';
 import Navbar from '../components/Navbar.vue';
 
-const router = useRouter()
 const authStore = useAuthStore()
 
 const newUser = ref(DefaultUserCreationObj);
 const isCreateUserModalOpen = ref(false);
+const searchQuery = ref("");
+const selectedRoleForFilter = ref(-1);
 
 const canManageUsers = computed(() => authStore.user?.role === UserRoleEnum.Admin);
+const filteredUsers = computed(() => {
+  const users = result.value?.users || [];
+  return users.filter((user: any) => {
+
+    const matchSearch = user.name.toLowerCase().includes(searchQuery.value.toLowerCase()) || user.email.toLowerCase().includes(searchQuery.value.toLowerCase());
+    // console.log(typeof selectedRoleForFilter.value)
+    const matchRole = selectedRoleForFilter.value !== -1 ? user.role === selectedRoleForFilter.value : true;
+
+    return matchSearch && matchRole;
+  });
+});
+const getTotalUserFoundText = computed(() => {
+  return NumberOfRecordFoundMsg.replace("{number_of_users}", (filteredUsers.value.length) > 1 ? `${filteredUsers.value.length} records` : `${filteredUsers.value.length} record`);
+});
+
 
 const filteredUserRoleKeyList = Object.keys(UserRoleEnum).filter(key => isNaN(Number(key)));
 
@@ -32,18 +47,10 @@ const USERS_QUERY = gql`
 // Fetch Data
 const { result, loading, error } = useQuery(USERS_QUERY)
 
-// Logout Function
-const logout = () => {
-  authStore.logout()
-  router.push('/')
-}
-
-// Open Create User Modal
 const openCreateUserModal = () => {
   isCreateUserModalOpen.value = true;
 };
 
-// Close Modal
 const closeCreateUserModal = () => {
   isCreateUserModalOpen.value = false;
 };
@@ -60,14 +67,30 @@ const createUser = () => {
     <navbar></navbar>
     <div v-if="result" class="m-6 overflow-scroll px-0">
 
-      <h2 class="text-2xl font-bold mb-4">User List</h2>
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
+      <div>
+        <h2 class="text-2xl font-semibold text-19315b">{{ SecondOptionText }}</h2>
+        <p class="text-m text-gray-600">{{ UserPageInfoText }}</p>
+        <p class="text-sm text-gray-400">{{ getTotalUserFoundText }}</p>
+      </div>
 
-      <button @click="logout" class="bg-red-500 text-white px-4 py-2 rounded mb-4">Logout</button>
+      <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+        <input
+          type="text"
+          v-model="searchQuery"
+          placeholder="Search by name or email"
+          class="w-full sm:w-64 px-4 py-2 border rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        />
 
-      <button v-if="canManageUsers" @click="openCreateUserModal"
-        class="mb-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-        Create User
-      </button>
+        <select v-model="selectedRoleForFilter" class="w-full sm:w-48 px-4 py-2 border rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <option :value=-1>All Roles</option>
+            <option v-for="(currRole, index) in filteredUserRoleKeyList" :key="index" :value="AppUtils.getEnumValueFromKeyName(currRole)">   
+              {{ AppUtils.getNewRoleNameByKey(currRole) }}
+            </option>
+          </select>
+
+      </div>
+    </div>
 
       <!-- Create User Modal -->
       <div v-if="isCreateUserModalOpen" class="fixed inset-0 flex items-center justify-center">
@@ -86,7 +109,6 @@ const createUser = () => {
           <label class="block text-gray-700">Role</label>
           <select v-model="newUser.role" class="w-full p-2 border rounded-lg mb-4">
             <option v-for="(currRole, index) in filteredUserRoleKeyList" :key="index" :value="AppUtils.getEnumValueFromKeyName(currRole)">
-              {{ console.log(currRole) }}    
               {{ AppUtils.getNewRoleNameByKey(currRole) }}
             </option>
           </select>
@@ -136,7 +158,7 @@ const createUser = () => {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(user, index) in result.users" :key="user.id">
+          <tr v-for="(user, index) in filteredUsers" :key="user.id">
             <td class="p-4 border-b border-blue-gray-50">
               <div class="flex items-center gap-3">
                 <div class="flex flex-col">
@@ -179,7 +201,7 @@ const createUser = () => {
         @click="openCreateUserModal"
         class="hover:scale-105 duration-300 text-white px-6 py-3 rounded-full shadow-lg text-sm transition-all"
       >
-        + Create User
+        {{ CreateNewUserText }}
       </button>
     </div>
     </div>
