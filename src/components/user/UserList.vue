@@ -4,17 +4,17 @@
       <thead>
         <tr>
           <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
-            <p class="antialiased font-sans text-sm text-blue-gray-900 font-normal opacity-70">
+            <p class="antialiased font-sans text-sm text-blue-gray-900 font-bold">
               {{ FirstColumnHeaderText }}
             </p>
           </th>
           <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
-            <p class="antialiased font-sans text-sm text-blue-gray-900 font-normal opacity-70">
+            <p class="antialiased font-sans text-sm text-blue-gray-900 font-bold">
               {{ SecondColumnHeaderText }}
             </p>
           </th>
           <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
-            <p class="antialiased font-sans text-sm text-blue-gray-900 font-normal opacity-70">
+            <p class="antialiased font-sans text-sm text-blue-gray-900 font-bold">
               {{ ThirdColumnHeaderText }}
             </p>
           </th>
@@ -41,10 +41,10 @@
           </td>
           <td class="p-4 border-b border-blue-gray-50 break-all">
             <div class="flex flex-col">
-              <p class="antialiased font-sans text-sm text-blue-gray-900 font-normal">
+              <p class="antialiased font-sans font-semibold text-sm text-blue-gray-900">
                 {{ user.name }}
               </p>
-              <p class="antialiased font-sans text-sm text-blue-gray-900 font-normal opacity-70">
+              <p class="antialiased font-sans text-sm font-normal text-blue-gray-900 opacity-70">
                 {{ user.email }}
               </p>
             </div>

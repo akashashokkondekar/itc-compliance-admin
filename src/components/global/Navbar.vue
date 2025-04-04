@@ -2,7 +2,7 @@
   <nav class="background-color-19315b border-gray-200 dark:bg-gray-900">
     <div class="flex flex-wrap items-center justify-between mx-auto p-4">
       <RouterLink to="/dashboard" class="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="https://www.itccompliance.com/img/itc_logo.7fa7c0aa.svg" class="h-8" alt="ITC Logo" />
+        <img src="/itc_logo.svg" class="h-8" alt="ITC Logo" />
         <span class="self-center text-2xl font-light whitespace-nowrap text-white">{{ AdminIntroHeaderText }}</span>
       </RouterLink>
 

@@ -6,8 +6,9 @@ import { useAuthStore } from '../stores/auth'
 import CreateNewUser from '../components/user/CreateNewUserModal.vue'
 import CreateNewUserButton from '../components/user/CreateNewUserButton.vue'
 import type { EmitValue } from './../types/Interface';
+import Info from "../components/global/Info.vue";
 import UserList from "../components/user/UserList.vue";
-import { UserRoleEnum, NumberOfRecordFoundMsg, UserOperationEnum } from '../utils/AppConstant';
+import { UserRoleEnum, NumberOfRecordFoundMsg, UserOperationEnum, GenericServerErrorMessageTwo } from '../utils/AppConstant';
 import Navbar from '../components/global/Navbar.vue';
 import FilterBar from './../components/user/FilterBar.vue';
 import TableSkeleton from "../components/user/TableSkeleton.vue";
@@ -29,6 +30,7 @@ const filteredUsers = computed(() => {
 
     return matchSearch && matchRole;
   });
+
 });
 
 const getTotalUserFoundText = computed(() => {
@@ -68,11 +70,16 @@ const handleUserClickAction = (emittedObj: EmitValue): void => {
 <template>
   <div>
     <Navbar :preLoginScreen="false" />
-    <div v-if="error" class="text-red-500">{{ error.message }}</div>
-    <FilterBar v-model:searchQuery="searchQuery" v-model:selectedRoleForFilter="selectedRoleForFilter" :getTotalUserFoundText="getTotalUserFoundText" :filteredUserRoleKeyList="filteredUserRoleKeyList" @performUserClickAction="handleUserClickAction" class="m-6 overflow-scroll px-0"/>
+    <FilterBar v-model:searchQuery="searchQuery" v-model:selectedRoleForFilter="selectedRoleForFilter"
+      :getTotalUserFoundText="getTotalUserFoundText" :filteredUserRoleKeyList="filteredUserRoleKeyList"
+      @performUserClickAction="handleUserClickAction" class="m-6 overflow-scroll px-0" />
+    <Info v-if="error" :msgToShow="GenericServerErrorMessageTwo" />
+
     <UserList :filteredUsers="filteredUsers" v-if="result" class="m-6 overflow-scroll px-0 overflow-x-auto" />
-    <TableSkeleton v-if="loading" class="m-6 overflow-scroll px-0 overflow-x-auto"/>
-    <CreateNewUser :filteredUserRoleKeyList="filteredUserRoleKeyList" @performUserClickAction="handleUserClickAction" v-if="isCreateUserModalOpen" />
-    <CreateNewUserButton v-if="canManageUsers && !isCreateUserModalOpen" @performUserClickAction="handleUserClickAction" class="fixed bottom-6 right-6 z-50" />
+    <TableSkeleton v-if="loading" class="m-6 overflow-scroll px-0 overflow-x-auto" />
+    <CreateNewUser :filteredUserRoleKeyList="filteredUserRoleKeyList" @performUserClickAction="handleUserClickAction"
+      v-if="isCreateUserModalOpen" />
+    <CreateNewUserButton v-if="canManageUsers && !isCreateUserModalOpen" @performUserClickAction="handleUserClickAction"
+      class="fixed bottom-6 right-6 z-50" />
   </div>
 </template>

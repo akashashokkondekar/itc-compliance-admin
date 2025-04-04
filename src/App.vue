@@ -3,6 +3,7 @@ import LostNetworkInfoStrip from './components/global/LostNetworkInfoStrip.vue';
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import { useAuthStore } from "./stores/auth";
 import { useNetworkStatusStore } from "./stores/network";
+import Splash from './components/global/Splash.vue';
 
 const authStore = useAuthStore();
 const networkStatus = useNetworkStatusStore();
@@ -31,6 +32,7 @@ onMounted(() => {
   <div>
     <LostNetworkInfoStrip v-if="!isOnline"/>
     <RouterView />
+    <Splash/>
   </div>
 </template>
 

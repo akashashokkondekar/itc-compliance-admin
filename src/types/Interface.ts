@@ -11,4 +11,9 @@ export interface DefaultUserObj {
   password: string
 }
 
+export interface Intro {
+  header: string,
+  desc: string
+}
+
 export type UserList = DefaultUserObj[];

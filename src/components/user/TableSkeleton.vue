@@ -9,17 +9,17 @@ import { FirstColumnHeaderText, SecondColumnHeaderText, ThirdColumnHeaderText } 
       <thead>
         <tr>
           <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
-            <p class="antialiased font-sans text-sm text-blue-gray-900 font-normal opacity-70">
+            <p class="antialiased font-sans text-sm text-blue-gray-900 font-bold">
               {{ FirstColumnHeaderText }}
             </p>
           </th>
           <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
-            <p class="antialiased font-sans text-sm text-blue-gray-900 font-normal opacity-70">
+            <p class="antialiased font-sans text-sm text-blue-gray-900 font-bold">
               {{ SecondColumnHeaderText }}
             </p>
           </th>
           <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
-            <p class="antialiased font-sans text-sm text-blue-gray-900 font-normal opacity-70">
+            <p class="antialiased font-sans text-sm text-blue-gray-900 font-bold">
               {{ ThirdColumnHeaderText }}
             </p>
           </th>
