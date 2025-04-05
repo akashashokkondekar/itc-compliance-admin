@@ -1,12 +1,15 @@
 <template>
+
   <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
+
     <div>
-      <h2 class="text-2xl font-semibold text-19315b">{{ SecondOptionText }}</h2>
+      <h2 class="text-2xl font-semibold text-[#19315b]">{{ SecondOptionText }}</h2>
       <p class="text-m text-gray-600">{{ UserPageInfoText }}</p>
       <p class="text-sm text-gray-400">{{ getTotalUserFoundText }}</p>
     </div>
 
     <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+
       <input type="text" @input="onInputChange" placeholder="Search by name or email"
         class="w-full sm:w-64 px-4 py-2 border rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" />
 
@@ -20,12 +23,14 @@
       </select>
 
     </div>
+
   </div>
 
 </template>
+
 <script setup lang="ts">
-import { AllRoleSelectOptionText, SecondOptionText, UserPageInfoText } from '../../utils/AppConstant';
-import { AppUtils } from '../../utils/AppUtils';
+import { AllRoleSelectOptionText, SecondOptionText, UserPageInfoText } from "../../utils/AppConstant";
+import { AppUtils } from "../../utils/AppUtils";
 
 defineProps<{ filteredUserRoleKeyList: any, getTotalUserFoundText: string, selectedRoleForFilter: number, searchQuery: string }>()
 
@@ -50,3 +55,4 @@ const onInputChange = (event: Event) => {
 };
 
 </script>
+<style lang="css" scoped></style>

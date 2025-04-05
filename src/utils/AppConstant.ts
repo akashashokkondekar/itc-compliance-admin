@@ -7,6 +7,8 @@ export const EmailIdPlaceHolderText = "john.doe@gmail.com";
 export const PasswordPlaceHolderText = "Password";
 export const PostLoginButtonClickText = "Verifying...";
 export const MinPasswordCharLength = 4;
+export const ShowPasswordIcon = "👁️";
+export const HidePasswordIcon = "🙈";
 
 // General
 export const FeatureUnderDevelopmentInfoText = "This feature is under development.";
@@ -60,7 +62,7 @@ export const EmailInputLabelText = "Email:";
 export const PasswordInputLabelText = "Password:";
 export const PasswordInputPlaceHolderText = `Minimum of ${MinPasswordCharLength} characters required.`;
 export const RoleInputLabelText = "Role:";
-export const PostNewUserCreationMsg = "The user '{name}' user has been created successfully.";
+export const PostNewUserCreationMsg = "The user '{name}' has been created successfully.";
 export const MinNameCharLength = 4;
 export const CreateUserBtnText = "Create";
 

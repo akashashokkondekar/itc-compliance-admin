@@ -12,9 +12,10 @@
 </template>
 
 <script setup lang="ts">
-import Navbar from '../components/global/Navbar.vue';
-import { useAuthStore } from '../stores/auth';
-import { BackToHomeOptionText, ContentNotFoundText, NotFoundErrorHeaderText } from '../utils/AppConstant';
+import { useAuthStore } from "../stores/auth";
+import Navbar from "../components/global/Navbar.vue";
+import { BackToHomeOptionText, ContentNotFoundText, NotFoundErrorHeaderText } from "../utils/AppConstant";
+
 const authStore = useAuthStore();
 </script>
 

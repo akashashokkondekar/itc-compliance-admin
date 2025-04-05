@@ -5,5 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { NoInternetConnectionAvailableMsg } from './../../utils/AppConstant';
+import { NoInternetConnectionAvailableMsg } from "./../../utils/AppConstant";
 </script>
+
+<style lang="css" scoped></style>

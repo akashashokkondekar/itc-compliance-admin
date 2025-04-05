@@ -1,16 +1,15 @@
-import './style.css'
-
+import "flowbite";
 import { createApp, provide, h } from "vue";
 import { createPinia } from 'pinia';
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import { ApolloClient, InMemoryCache } from "@apollo/client/core";
-import 'flowbite';
 import Toast from "vue3-toastify";
-import "vue3-toastify/dist/index.css";
 import VueAwesomePaginate from "vue-awesome-paginate";
+import App from "./App.vue";
+import router from "./router/router";
 import "vue-awesome-paginate/dist/style.css";
-import App from './App.vue'
-import router from './router/router'
+import "vue3-toastify/dist/index.css";
+import "./style.css";
 
 const apolloClient = new ApolloClient({
   uri: "http://localhost:4000/",
@@ -26,7 +25,7 @@ const app = createApp({
 
 app.use(Toast);
 app.use(VueAwesomePaginate);
-app.provide("$toast", Toast);
 app.use(router);
 app.use(createPinia());
+app.provide("$toast", Toast);
 app.mount("#app");

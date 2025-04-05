@@ -1,26 +1,52 @@
+<template>
+
+  <div>
+
+    <Navbar :preLoginScreen="false" />
+
+    <FilterBar v-model:searchQuery="searchQuery" v-model:selectedRoleForFilter="selectedRoleForFilter"
+      :getTotalUserFoundText="getTotalUserFoundText" :filteredUserRoleKeyList="filteredUserRoleKeyList"
+      @performUserClickAction="handleUserClickAction" class="m-6 overflow-scroll px-0" />
+
+    <Info v-if="error" :msgToShow="GenericServerErrorMessageTwo" />
+
+    <UserList :filteredUsers="filteredUsers" v-if="result" class="m-6 overflow-scroll px-0 overflow-x-auto" />
+
+    <TableSkeleton v-if="loading" class="m-6 overflow-scroll px-0 overflow-x-auto" />
+
+    <CreateNewUser :filteredUserRoleKeyList="filteredUserRoleKeyList" @performUserClickAction="handleUserClickAction"
+      v-if="isCreateUserModalOpen" />
+
+    <CreateNewUserButton v-if="canManageUsers && !isCreateUserModalOpen" @performUserClickAction="handleUserClickAction"
+      class="fixed bottom-6 right-6 z-50" />
+
+  </div>
+
+</template>
+
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { useQuery } from '@vue/apollo-composable'
-import gql from 'graphql-tag'
-import { useAuthStore } from '../stores/auth'
-import CreateNewUser from '../components/user/CreateNewUserModal.vue'
-import CreateNewUserButton from '../components/user/CreateNewUserButton.vue'
-import type { EmitValue } from './../types/Interface';
+import { useQuery } from "@vue/apollo-composable";
+import gql from "graphql-tag";
+import { useAuthStore } from "../stores/auth";
+import CreateNewUser from "../components/user/CreateNewUserModal.vue";
+import CreateNewUserButton from "../components/user/CreateNewUserButton.vue";
+import FilterBar from "./../components/user/FilterBar.vue";
+import TableSkeleton from "../components/user/TableSkeleton.vue";
 import Info from "../components/global/Info.vue";
 import UserList from "../components/user/UserList.vue";
-import { UserRoleEnum, NumberOfRecordFoundMsg, UserOperationEnum, GenericServerErrorMessageTwo } from '../utils/AppConstant';
 import Navbar from '../components/global/Navbar.vue';
-import FilterBar from './../components/user/FilterBar.vue';
-import TableSkeleton from "../components/user/TableSkeleton.vue";
+import { UserRoleEnum, NumberOfRecordFoundMsg, UserOperationEnum, GenericServerErrorMessageTwo } from "../utils/AppConstant";
+import type { EmitValue } from "./../types/Interface";
 
 const authStore = useAuthStore()
-
 const isCreateUserModalOpen = ref<boolean>(false);
 const searchQuery = ref<string>("");
 const selectedRoleForFilter = ref<number>(-1);
 const filteredUserRoleKeyList = Object.keys(UserRoleEnum).filter(key => isNaN(Number(key)));
 
 const canManageUsers = computed(() => authStore.user?.role === UserRoleEnum.Admin);
+
 const filteredUsers = computed(() => {
   const users = result.value?.users || [];
   return users.filter((user: any) => {
@@ -64,22 +90,6 @@ const handleUserClickAction = (emittedObj: EmitValue): void => {
   }
 
 }
-
 </script>
 
-<template>
-  <div>
-    <Navbar :preLoginScreen="false" />
-    <FilterBar v-model:searchQuery="searchQuery" v-model:selectedRoleForFilter="selectedRoleForFilter"
-      :getTotalUserFoundText="getTotalUserFoundText" :filteredUserRoleKeyList="filteredUserRoleKeyList"
-      @performUserClickAction="handleUserClickAction" class="m-6 overflow-scroll px-0" />
-    <Info v-if="error" :msgToShow="GenericServerErrorMessageTwo" />
-
-    <UserList :filteredUsers="filteredUsers" v-if="result" class="m-6 overflow-scroll px-0 overflow-x-auto" />
-    <TableSkeleton v-if="loading" class="m-6 overflow-scroll px-0 overflow-x-auto" />
-    <CreateNewUser :filteredUserRoleKeyList="filteredUserRoleKeyList" @performUserClickAction="handleUserClickAction"
-      v-if="isCreateUserModalOpen" />
-    <CreateNewUserButton v-if="canManageUsers && !isCreateUserModalOpen" @performUserClickAction="handleUserClickAction"
-      class="fixed bottom-6 right-6 z-50" />
-  </div>
-</template>
+<style lang="css" scoped></style>

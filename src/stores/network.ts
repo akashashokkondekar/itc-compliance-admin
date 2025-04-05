@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 
 export const useNetworkStatusStore = defineStore("network", {
+
   state: () => ({
     isOnline: true as boolean | undefined | null 
   }),
@@ -8,5 +9,6 @@ export const useNetworkStatusStore = defineStore("network", {
     setNetworkStatus(isOnline: boolean) {
       this.isOnline = isOnline;
     }
-  },
+  }
+  
 });
