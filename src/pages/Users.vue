@@ -27,7 +27,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { useQuery } from "@vue/apollo-composable";
-import gql from "graphql-tag";
 import { useAuthStore } from "../stores/auth";
 import CreateNewUser from "../components/user/CreateNewUserModal.vue";
 import CreateNewUserButton from "../components/user/CreateNewUserButton.vue";
@@ -38,8 +37,9 @@ import UserList from "../components/user/UserList.vue";
 import Navbar from '../components/global/Navbar.vue';
 import { UserRoleEnum, NumberOfRecordFoundMsg, UserOperationEnum, GenericServerErrorMessageTwo } from "../utils/AppConstant";
 import type { EmitValue } from "./../types/Interface";
+import { GET_USERS } from "../graphql/Queries";
 
-const authStore = useAuthStore()
+const authStore = useAuthStore();
 const isCreateUserModalOpen = ref<boolean>(false);
 const searchQuery = ref<string>("");
 const selectedRoleForFilter = ref<number>(-1);
@@ -63,17 +63,7 @@ const getTotalUserFoundText = computed(() => {
   return NumberOfRecordFoundMsg.replace("{number_of_users}", (filteredUsers.value.length) > 1 ? `${filteredUsers.value.length} records` : `${filteredUsers.value.length} record`);
 });
 
-const USERS_QUERY = gql`
-  query {
-    users {
-      id
-      name
-      email
-      role
-    }
-  }
-`
-const { result, loading, error } = useQuery(USERS_QUERY)
+const { result, loading, error } = useQuery(GET_USERS);
 
 const handleUserClickAction = (emittedObj: EmitValue): void => {
 

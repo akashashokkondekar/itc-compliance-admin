@@ -1,6 +1,6 @@
 import "flowbite";
 import { createApp, provide, h } from "vue";
-import { createPinia } from 'pinia';
+import { createPinia } from "pinia";
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import { ApolloClient, InMemoryCache } from "@apollo/client/core";
 import Toast from "vue3-toastify";

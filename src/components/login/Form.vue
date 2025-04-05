@@ -38,9 +38,9 @@ import { useRouter } from "vue-router";
 import { useAuthStore } from "./../../stores/auth";
 import { useNetworkStatusStore } from "./../../stores/network";
 import { useMutation } from "@vue/apollo-composable";
-import gql from "graphql-tag";
 import { LoginFormHeaderText, LoginFormHeaderDescText, ToastTypeEnum, GenericServerErrorMessageOne, EmailIdPlaceHolderText, PasswordPlaceHolderText, PostLoginButtonClickText, GenericServerErrorMessageTwo, NoInternetConnectionAvailableMsg, MinPasswordCharLength, HidePasswordIcon, ShowPasswordIcon } from "./../../utils/AppConstant";
 import { AppUtils } from "../../utils/AppUtils";
+import { LOGIN_MUTATION } from "../../graphql/Queries";
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -65,20 +65,6 @@ const disableSignInBtn = (): boolean => {
 const togglePassword = (): void => {
   showPassword.value = !showPassword.value;
 };
-
-const LOGIN_MUTATION = gql`
-  mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-      user {
-        id
-        name
-        email
-        role
-      }
-    }
-  }
-`;
 
 const { mutate: login, loading, error } = useMutation(LOGIN_MUTATION);
 

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isLoading" class="absolute inset-0 flex items-center justify-center background-color-19315b z-50">
+  <div v-if="isLoading" class="absolute inset-0 flex items-center justify-center bg-[#19315b] z-50">
 
     <div class="text-center">
       <img src="/itc_logo.svg" alt="Company Logo" class="w-50 h-auto mb-1" />

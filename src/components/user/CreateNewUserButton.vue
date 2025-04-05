@@ -10,7 +10,7 @@ import type { EmitValue } from "../../types/Interface";
 import { CreateNewUserText, UserOperationEnum } from "../../utils/AppConstant";
 
 const emit = defineEmits<{
-  (event: 'performUserClickAction', emittedObj: EmitValue): void;
+  (event: "performUserClickAction", emittedObj: EmitValue): void;
 }>();
 
 const openCreateNewUserModal = () => {
@@ -18,7 +18,7 @@ const openCreateNewUserModal = () => {
     operationType: UserOperationEnum.Open_Create_User_Modal,
     object: null
   }
-  emit('performUserClickAction', objToReturn);
+  emit("performUserClickAction", objToReturn);
 };
 
 </script>

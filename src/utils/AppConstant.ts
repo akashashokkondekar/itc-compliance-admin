@@ -25,10 +25,6 @@ export const DummyTeamInfoArr = [
   { id: 3, name: "Katharina Johnson", role: "Lead Designer", info: 'One of the villagers, Kristina Halvorson from Adaptive Path, holds steadfastly to the notion that design can’t be tested without real content', image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 4, name: "Bob Williams", role: "Software Engineer", info: 'you still use Lorem Ipsum and rightly so, as it will always have a place in the web workers toolbox, as things happen, not always the way you like it.', image: "https://plus.unsplash.com/premium_photo-1671656349218-5218444643d8?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
 ]
-export const DefaultIntroComponentObj = {
-  header: "",
-  desc: ""
-}
 
 // User
 export const CreateNewUserText = "+ Create User";
@@ -39,6 +35,7 @@ export const SecondColumnHeaderText = "Role";
 export const ThirdColumnHeaderText = "User Information";
 export const AllRoleSelectOptionText = "All Roles";
 export const NoUsersFoundMsg = "No user found.";
+export const SearchByNameOrEmailPlaceholderText = "Search by name or email";
 
 // Dashboard
 export const DashboardPageInfoText = "Fun Lorem Ipsum text may appear in any size and font to simulate everything you create for your campaigns. you land on a sample web page or open an email template and see content beginning with lorem ipsum, the page creator placed that apparent gibberish there on purpose. <br/><br/>The short answer is that lorem ipsum text doesn't actually \"say\" anything meaningful. It's deliberately scrambled Latin that doesn't.If everyone used the identical lorem ipsum copy, search engines would flag it for plagiarism and downgrade the site for its lack of helpful content for the reader. However, when you send sample layouts filled with fun lorem ipsum to your customers, they will focus on the look and feel of the page instead of digging into and arguing about the content. Nevertheless, lorem ipsum generators do not spew a random bank of words and paragraphs.";
@@ -122,3 +119,9 @@ export const DefaultUserCreationObj = {
   role: UserRoleEnum.User,
   password: '4%@qEE'
 };
+
+export const DefaultIntroComponentObj = {
+  header: "",
+  desc: ""
+}
+

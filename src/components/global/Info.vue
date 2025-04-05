@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ msgToShow: any }>()
+defineProps<{ msgToShow: string }>()
 </script>
 
 <style lang="css" scoped></style>
