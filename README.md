@@ -58,31 +58,32 @@ Clone the GraphQL Mock Server repository [Link: https://github.com/akashashokkon
 Once the mock server is running, you can proceed with the next steps.
 
 2.**Clone the admin repository:**
-```bash
-git clone https://github.com/akashashokkondekar/itc-compliance-admin.git
-cd <project-folder>
-```
+  ```bash
+    git clone https://github.com/akashashokkondekar/itc-compliance-admin.git
+    cd <project-folder>
+  ```
 
 3.**Pull all branches** from the origin:
    ```bash
-   git fetch --all
+    git fetch --all
    ```
 
 4.**Switch to the Deployment/Prod or main branch:**
   ```bash
-  git checkout Deployment/Prod
+    git checkout Deployment/Prod
   ```
 or
-```bash
-git checkout main
-```
+  ```bash
+  git checkout main
+  ```
 
 5.**Install dependencies:** Ensure you are using **Node.js v18.20.0** and **npm v10.5.0** or above versions. (Use nvm or a similar version manager if needed).
   ```bash
   npm install
   ```
 6.**Run the development server:**
-```bash
+
+  ```bash
   npm run dev
   ```
 The application should now be running at **http://localhost:5173**.
@@ -90,8 +91,7 @@ The application should now be running at **http://localhost:5173**.
 7.**Sign in using the following credentials:**
 - For _Administrator_ role:
   - Username: akash@gmail.com
-  - Password (For Deployment/Prod and main branch): A!s2D%
-  - Password (For rest of the branches): admin
+  - Password: A!s2D%
 - For _User_ role:
   - Username: hmalin0@sogou.com
   - Password: oK4/vV>$
@@ -99,6 +99,11 @@ The application should now be running at **http://localhost:5173**.
   - Username: lmattiato1f@smugmug.com
   - Password: lG23Q
 
+You can find more accounts below:
+
+- Link: https://github.com/akashashokkondekar/mock-graphql-server/blob/main/Utils/AppConstant.ts
+- Comment: Refer **UserList**
+  
  ## Package Information
 ```
  {
@@ -147,6 +152,6 @@ Remember, both the Admin Portal and GraphQL Mock Server must be running simultan
 
 2. Project Management & Structure
     - State Management: Used Pinia for state management to handle token storage, user session management, and form data.
-    - Component-Based Architecture: Divided the application into reusable components for the login form, user list, toast notifications, and others.
+    Component-Based Architecture: The application was divided into reusable components for the login form, user list, toast notifications, and others.
     - Vue Router: Used for handling route navigation and implementing route guards for protecting admin and other private routes.
     - TailwindCSS: Utilized TailwindCSS to design a fully responsive, mobile-first UI, including custom styling and utility classes.
