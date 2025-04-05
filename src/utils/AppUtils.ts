@@ -1,15 +1,4 @@
-import {
-  AdminRoleText,
-  NoneRoleText,
-  UserRoleEnum,
-  UserRoleText,
-  ToastTypeEnum,
-  AutoCloseToastTimeout,
-  SupportRTFInToast,
-  HideAutoCloseProgressBar,
-  ToastTheme,
-  ToastPosition,
-} from "./AppConstant";
+import { AdminRoleText, NoneRoleText, UserRoleEnum, UserRoleText, ToastTypeEnum, AutoCloseToastTimeout, SupportRTFInToast, HideAutoCloseProgressBar, ToastTheme, ToastPosition, } from "./AppConstant";
 
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
@@ -19,6 +8,7 @@ export class AppUtils {
 
     let valueToReturn = "";
     switch (userRole) {
+    
       default:
       case UserRoleEnum.None:
         valueToReturn = NoneRoleText;
@@ -40,6 +30,7 @@ export class AppUtils {
 
     let valueToReturn = "info";
     switch (toastType) {
+
       default:
       case ToastTypeEnum.Default:
         valueToReturn = "default";
@@ -84,7 +75,9 @@ export class AppUtils {
   static getNewRoleNameByKey = (key: any): string => {
 
     var valueToReturn = NoneRoleText;
+
     switch (parseInt(UserRoleEnum[key])) {
+    
       case UserRoleEnum.User:
         valueToReturn = UserRoleText;
         break;
@@ -97,10 +90,11 @@ export class AppUtils {
         break;
     }
     return valueToReturn;
-  
+
   };
 
   static getEnumValueFromKeyName = (roleKey: string): number => {
     return UserRoleEnum[roleKey as keyof typeof UserRoleEnum];
   };
+  
 }

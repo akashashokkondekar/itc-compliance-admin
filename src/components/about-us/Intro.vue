@@ -7,9 +7,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Intro } from '../../types/Interface';
+import type { Intro } from "../../types/Interface";
 
 defineProps<{ obj: Intro }>()
 </script>
 
-<style scoped></style>
+<style lang="css" scoped></style>

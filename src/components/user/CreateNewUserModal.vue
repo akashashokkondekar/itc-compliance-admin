@@ -1,6 +1,7 @@
 <template>
 
   <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+
     <div class="bg-white p-10 rounded-lg shadow-lg w-130">
 
       <label class="block text-sm text-gray-700">{{ NameInputLabelText }}</label>
@@ -24,32 +25,38 @@
       </select>
 
       <div class="flex pt-4 justify-center">
-        <button @click="closeCreateUserModal" class="px-4 py-2 cancel-btn-styling cursor-pointer mr-3 rounded-lg">{{ CloseCreateNewUserModalBtnText }}</button>
+
+        <button @click="closeCreateNewUserModal" class="px-4 py-2 cancel-btn-styling cursor-pointer mr-3 rounded-lg">{{
+          CloseCreateNewUserModalBtnText }}</button>
         <button @click="createUser"
           :class="{ 'px-4 py-2 rounded-lg': !disableCreateBtn(), 'px-4 py-2 rounded-lg opacity-50 cursor-not-allowed': disableCreateBtn() }"
           :disabled="disableCreateBtn()">{{ CreateUserBtnText }}</button>
+
       </div>
+
     </div>
+
   </div>
 
 </template>
+
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { AppUtils } from '../../utils/AppUtils';
-import { DefaultUserCreationObj, MinPasswordCharLength, MinNameCharLength, PostNewUserCreationMsg, ToastTypeEnum, UserOperationEnum, NoInternetConnectionAvailableMsg, NameInputLabelText, NameInputPlaceHolderText, EmailInputLabelText, EmailIdPlaceHolderText, PasswordInputLabelText, PasswordInputPlaceHolderText, RoleInputLabelText, CloseCreateNewUserModalBtnText, CreateUserBtnText } from '../../utils/AppConstant';
-import type { DefaultUserObj, EmitValue } from "../../types/Interface";
 import { useNetworkStatusStore } from "../../stores/network";
+import { DefaultUserCreationObj, MinPasswordCharLength, MinNameCharLength, PostNewUserCreationMsg, ToastTypeEnum, UserOperationEnum, NoInternetConnectionAvailableMsg, NameInputLabelText, NameInputPlaceHolderText, EmailInputLabelText, EmailIdPlaceHolderText, PasswordInputLabelText, PasswordInputPlaceHolderText, RoleInputLabelText, CloseCreateNewUserModalBtnText, CreateUserBtnText } from "../../utils/AppConstant";
+import type { DefaultUserObj, EmitValue } from "../../types/Interface";
+import { AppUtils } from "../../utils/AppUtils";
+
+const newUser = ref<DefaultUserObj>(DefaultUserCreationObj);
+const networkStatus = useNetworkStatusStore();
 
 defineProps<{ filteredUserRoleKeyList: any }>()
 const emit = defineEmits<{
   (event: 'performUserClickAction', emittedObj: EmitValue): void;
 }>();
 
-const newUser = ref<DefaultUserObj>(DefaultUserCreationObj);
-const networkStatus = useNetworkStatusStore();
-
 const nameError = computed(() => {
-  return newUser.value.name.trim().length < MinNameCharLength;
+  return (newUser.value.name.trim().length < MinNameCharLength);
 });
 
 const emailError = computed(() => {
@@ -57,7 +64,7 @@ const emailError = computed(() => {
 });
 
 const passwordError = computed(() => {
-  return newUser.value.password.trim().length < MinPasswordCharLength;
+  return (newUser.value.password.trim().length < MinPasswordCharLength);
 });
 
 const disableCreateBtn = (): boolean => {
@@ -74,14 +81,15 @@ const createUser = () => {
     }
 
     AppUtils.showToastMsg(PostNewUserCreationMsg.replace("{name}", newUser.value.name), ToastTypeEnum.Success);
-    closeCreateUserModal();
+    closeCreateNewUserModal();
 
   } catch (err) {
 
   }
+
 };
 
-const closeCreateUserModal = () => {
+const closeCreateNewUserModal = () => {
 
   const objToReturn: EmitValue = {
     operationType: UserOperationEnum.Close_Create_User_Modal,

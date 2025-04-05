@@ -8,4 +8,4 @@
 defineProps<{ msgToShow: any }>()
 </script>
 
-<style scoped></style>
+<style lang="css" scoped></style>

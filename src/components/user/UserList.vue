@@ -1,18 +1,25 @@
 <template>
+
   <div>
+
     <table class="mt-4 w-full min-w-max table-fixed text-left">
+
       <thead>
+
         <tr>
+
           <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
             <p class="antialiased font-sans text-sm text-blue-gray-900 font-bold">
               {{ FirstColumnHeaderText }}
             </p>
           </th>
+
           <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
             <p class="antialiased font-sans text-sm text-blue-gray-900 font-bold">
               {{ SecondColumnHeaderText }}
             </p>
           </th>
+
           <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
             <p class="antialiased font-sans text-sm text-blue-gray-900 font-bold">
               {{ ThirdColumnHeaderText }}
@@ -20,13 +27,17 @@
           </th>
         </tr>
       </thead>
+
       <tbody>
+
         <tr v-for="(user, index) in paginatedUsers" :key="user.id">
+
           <td class="p-4 border-b border-blue-gray-50">
             <p class="antialiased font-sans text-sm text-blue-gray-900 font-normal">
               {{ index + 1 + (currentPage - 1) * RecordsPerPage }}.
             </p>
           </td>
+
           <td class="p-4 border-b border-blue-gray-50">
             <div class="w-max">
               <div :class="{
@@ -39,6 +50,7 @@
               </div>
             </div>
           </td>
+
           <td class="p-4 border-b border-blue-gray-50 break-all">
             <div class="flex flex-col">
               <p class="antialiased font-sans font-semibold text-sm text-blue-gray-900">
@@ -49,8 +61,11 @@
               </p>
             </div>
           </td>
+
         </tr>
+
       </tbody>
+
     </table>
 
     <div class="mt-4 pb-5 flex justify-center" v-if="filteredUsers.length !== 0">
@@ -58,18 +73,19 @@
         :hidePrevNextWhenEnds="HideNextPrevBtnWhenEnds" :disable-breakpoint-buttons="DisableBreakPointBtns"
         :max-pages-shown="MaxPageNumberToShowCount" v-model="currentPage" @click="handlePaginationClick" />
     </div>
+
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
-import { DisableBreakPointBtns, FirstColumnHeaderText, HideNextPrevBtnWhenEnds, MaxPageNumberToShowCount, RecordsPerPage, SecondColumnHeaderText, ThirdColumnHeaderText, UserRoleEnum } from '../../utils/AppConstant';
-import { AppUtils } from '../../utils/AppUtils';
-import type { UserList } from '../../types/Interface';
-
-const props = defineProps<{ filteredUsers: UserList }>();
+import { computed, ref, watch } from "vue";
+import { DisableBreakPointBtns, FirstColumnHeaderText, HideNextPrevBtnWhenEnds, MaxPageNumberToShowCount, RecordsPerPage, SecondColumnHeaderText, ThirdColumnHeaderText, UserRoleEnum } from "../../utils/AppConstant";
+import { AppUtils } from "../../utils/AppUtils";
+import type { UserList } from "../../types/Interface";
 
 const currentPage = ref<number>(1);
+
+const props = defineProps<{ filteredUsers: UserList }>();
 
 const paginatedUsers = computed(() => {
   const start = (currentPage.value - 1) * RecordsPerPage;
