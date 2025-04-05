@@ -1,4 +1,4 @@
-import { AdminRoleText, NoneRoleText, UserRoleEnum, UserRoleText, ToastTypeEnum, AutoCloseToastTimeout, SupportRTFInToast, HideAutoCloseProgressBar, ToastTheme, ToastPosition, } from "./AppConstant";
+import { AdminRoleText, NoneRoleText, UserRoleEnum, UserRoleText, MsgTypeEnum, AutoCloseToastTimeout, SupportRTFInToast, HideAutoCloseProgressBar, ToastTheme, ToastPosition, } from "./AppConstant";
 
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
@@ -32,19 +32,19 @@ export class AppUtils {
     switch (toastType) {
 
       default:
-      case ToastTypeEnum.Default:
+      case MsgTypeEnum.Default:
         valueToReturn = "default";
         break;
 
-      case ToastTypeEnum.Error:
+      case MsgTypeEnum.Error:
         valueToReturn = "error";
         break;
 
-      case ToastTypeEnum.Success:
+      case MsgTypeEnum.Success:
         valueToReturn = "success";
         break;
 
-      case ToastTypeEnum.Warning:
+      case MsgTypeEnum.Warning:
         valueToReturn = "warning";
         break;
     }

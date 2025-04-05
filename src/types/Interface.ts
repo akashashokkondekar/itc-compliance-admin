@@ -3,7 +3,7 @@ export interface EmitValue {
   object: any
 }
 
-export interface DefaultUserObj {
+export interface UserObj {
   id: string,
   name: string,
   email: string,
@@ -16,4 +16,9 @@ export interface Intro {
   desc: string
 }
 
-export type UserList = DefaultUserObj[];
+export interface Info {
+  msg: string,
+  type: number
+}
+
+export type UserList = UserObj[];

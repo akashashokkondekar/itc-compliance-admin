@@ -26,11 +26,15 @@
 
       <div class="flex pt-4 justify-center">
 
-        <button @click="closeCreateNewUserModal" class="px-4 py-2 cancel-btn-styling cursor-pointer mr-3 rounded-lg">{{
-          CloseCreateNewUserModalBtnText }}</button>
+        <button @click="closeCreateNewUserModal" class="px-4 py-2 cancel-btn-styling cursor-pointer mr-3 rounded-lg">
+          {{ CloseCreateNewUserModalBtnText }}
+        </button>
+
         <button @click="createUser"
-          :class="{ 'px-4 py-2 rounded-lg': !disableCreateBtn(), 'px-4 py-2 rounded-lg opacity-50 cursor-not-allowed': disableCreateBtn() }"
-          :disabled="disableCreateBtn()">{{ CreateUserBtnText }}</button>
+          :class="{ 'px-4 py-2 rounded-lg cursor-pointer': !disableCreateBtn(), 'px-4 py-2 rounded-lg opacity-50 cursor-not-allowed': disableCreateBtn() }"
+          :disabled="disableCreateBtn()">
+          {{ CreateUserBtnText }}
+        </button>
 
       </div>
 
@@ -43,16 +47,16 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { useNetworkStatusStore } from "../../stores/network";
-import { DefaultUserCreationObj, MinPasswordCharLength, MinNameCharLength, PostNewUserCreationMsg, ToastTypeEnum, UserOperationEnum, NoInternetConnectionAvailableMsg, NameInputLabelText, NameInputPlaceHolderText, EmailInputLabelText, EmailIdPlaceHolderText, PasswordInputLabelText, PasswordInputPlaceHolderText, RoleInputLabelText, CloseCreateNewUserModalBtnText, CreateUserBtnText } from "../../utils/AppConstant";
-import type { DefaultUserObj, EmitValue } from "../../types/Interface";
+import { DefaultUserCreationObj, MinPasswordCharLength, MinNameCharLength, PostNewUserCreationMsg, MsgTypeEnum, UserOperationEnum, NoInternetConnectionAvailableMsg, NameInputLabelText, NameInputPlaceHolderText, EmailInputLabelText, EmailIdPlaceHolderText, PasswordInputLabelText, PasswordInputPlaceHolderText, RoleInputLabelText, CloseCreateNewUserModalBtnText, CreateUserBtnText } from "../../utils/AppConstant";
+import type { UserObj, EmitValue } from "../../types/Interface";
 import { AppUtils } from "../../utils/AppUtils";
 
-const newUser = ref<DefaultUserObj>(DefaultUserCreationObj);
+const newUser = ref<UserObj>(DefaultUserCreationObj);
 const networkStatus = useNetworkStatusStore();
 
-defineProps<{ filteredUserRoleKeyList: any }>()
+defineProps<{ filteredUserRoleKeyList: any }>();
 const emit = defineEmits<{
-  (event: 'performUserClickAction', emittedObj: EmitValue): void;
+  (event: "performUserClickAction", emittedObj: EmitValue): void;
 }>();
 
 const nameError = computed(() => {
@@ -76,11 +80,11 @@ const createUser = () => {
   try {
 
     if (!networkStatus.isOnline) {
-      AppUtils.showToastMsg(NoInternetConnectionAvailableMsg, ToastTypeEnum.Error);
+      AppUtils.showToastMsg(NoInternetConnectionAvailableMsg, MsgTypeEnum.Error);
       return;
     }
 
-    AppUtils.showToastMsg(PostNewUserCreationMsg.replace("{name}", newUser.value.name), ToastTypeEnum.Success);
+    AppUtils.showToastMsg(PostNewUserCreationMsg.replace("{name}", newUser.value.name), MsgTypeEnum.Success);
     closeCreateNewUserModal();
 
   } catch (err) {
@@ -95,7 +99,7 @@ const closeCreateNewUserModal = () => {
     operationType: UserOperationEnum.Close_Create_User_Modal,
     object: null
   }
-  emit('performUserClickAction', objToReturn);
+  emit("performUserClickAction", objToReturn);
 
 };
 

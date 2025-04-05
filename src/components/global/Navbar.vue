@@ -1,11 +1,11 @@
 <template>
-  <nav class="background-color-19315b border-gray-200 dark:bg-gray-900">
+  <nav class="bg-[#19315b] border-gray-200">
    
     <div class="flex flex-wrap items-center justify-between mx-auto p-4">
 
       <RouterLink to="/dashboard" class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="/itc_logo.svg" class="h-8" alt="ITC Logo" />
-        <span class="self-center text-2xl font-light whitespace-nowrap text-white">{{ AdminIntroHeaderText }}</span>
+        <span class="self-center text-2xl font-light whitespace-nowrap text-[#fff]">{{ AdminIntroHeaderText }}</span>
       </RouterLink>
 
       <div v-if="!preLoginScreen" class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -23,7 +23,7 @@
 
           <div class="px-4 py-3">
             <span class="block text-sm text-black">{{ authStore?.user?.name }}</span>
-            <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{ authStore?.user?.email }}</span>
+            <span class="block text-sm text-gray-500 truncate">{{ authStore?.user?.email }}</span>
           </div>
 
           <ul class="py-2" aria-labelledby="user-menu-button">
@@ -45,7 +45,7 @@
       <div v-if="!preLoginScreen" class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
         id="navbar-user">
 
-        <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg background-color-19315b 
+        <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-[#19315b] 
                   md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
           <li>
 
@@ -82,14 +82,14 @@ import { onMounted } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import { Dropdown } from "flowbite";
 import { useAuthStore } from "../../stores/auth";
-import { AdminIntroHeaderText, FeatureUnderDevelopmentInfoText, FifthOptionText, FirstOptionText, FourthOptionText, SecondOptionText, ThirdOptionText, ToastTypeEnum, UserOperationEnum } from "../../utils/AppConstant";
+import { AdminIntroHeaderText, FeatureUnderDevelopmentInfoText, FifthOptionText, FirstOptionText, FourthOptionText, SecondOptionText, ThirdOptionText, MsgTypeEnum, UserOperationEnum } from "../../utils/AppConstant";
 import { AppUtils } from "../../utils/AppUtils";
 
 const route = useRoute();
-const router = useRouter()
+const router = useRouter();
 const authStore = useAuthStore();
 
-defineProps<{ preLoginScreen: boolean }>()
+defineProps<{ preLoginScreen: boolean }>();
 
 onMounted(() => {
 
@@ -122,7 +122,7 @@ const handleUserClick = (selectedUserActionEnum: number): void => {
       break;
 
     case UserOperationEnum.Open_Settings:
-      AppUtils.showToastMsg(FeatureUnderDevelopmentInfoText, ToastTypeEnum.Info);
+      AppUtils.showToastMsg(FeatureUnderDevelopmentInfoText, MsgTypeEnum.Info);
       break;
 
     case UserOperationEnum.Handle_Signout:

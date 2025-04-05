@@ -10,16 +10,18 @@
 
     <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
 
-      <input type="text" @input="onInputChange" placeholder="Search by name or email"
+      <input type="text" @input="onInputChange" :placeholder="SearchByNameOrEmailPlaceholderText"
         class="w-full sm:w-64 px-4 py-2 border rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" />
 
       <select :value="selectedRoleForFilter" @change="onSelectChange"
         class="w-full sm:w-48 px-4 py-2 border rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+
         <option :value=-1>{{ AllRoleSelectOptionText }}</option>
         <option v-for="(currRole, index) in filteredUserRoleKeyList" :key="index"
           :value="AppUtils.getEnumValueFromKeyName(currRole)">
           {{ AppUtils.getNewRoleNameByKey(currRole) }}
         </option>
+
       </select>
 
     </div>
@@ -29,28 +31,30 @@
 </template>
 
 <script setup lang="ts">
-import { AllRoleSelectOptionText, SecondOptionText, UserPageInfoText } from "../../utils/AppConstant";
+import { AllRoleSelectOptionText, SearchByNameOrEmailPlaceholderText, SecondOptionText, UserPageInfoText } from "../../utils/AppConstant";
 import { AppUtils } from "../../utils/AppUtils";
 
 defineProps<{ filteredUserRoleKeyList: any, getTotalUserFoundText: string, selectedRoleForFilter: number, searchQuery: string }>()
 
 const emit = defineEmits<{
-  (event: 'update:selectedRoleForFilter', value: number): void;
-  (event: 'update:searchQuery', value: string): void;
+  (event: "update:selectedRoleForFilter", value: number): void;
+  (event: "update:searchQuery", value: string): void;
 }>();
 
 const onSelectChange = (event: Event) => {
+
   const target = event.target as HTMLSelectElement | null;
   if (!target) return;
   const value = parseInt(target.value);
-  emit('update:selectedRoleForFilter', value)
+  emit("update:selectedRoleForFilter", value);
+
 }
 
 const onInputChange = (event: Event) => {
 
   const target = event.target as HTMLInputElement | null;
   if (!target) return;
-  emit('update:searchQuery', target.value);
+  emit("update:searchQuery", target.value);
 
 };
 

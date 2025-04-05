@@ -1,8 +1,8 @@
 <template>
   <div>
-    <LostNetworkInfoStrip v-if="!isOnline"/>
+    <LostNetworkInfoStrip v-if="!isOnline" />
     <RouterView />
-    <Splash/>
+    <Splash />
   </div>
 </template>
 
@@ -19,7 +19,7 @@ const isOnline = ref(navigator.onLine);
 
 // Update network status
 const updateNetworkStatus = () => {
-  isOnline.value = navigator.onLine
+  isOnline.value = navigator.onLine;
   networkStatus.setNetworkStatus(isOnline.value);
 };
 
