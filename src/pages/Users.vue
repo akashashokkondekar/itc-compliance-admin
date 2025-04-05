@@ -8,9 +8,10 @@
       :getTotalUserFoundText="getTotalUserFoundText" :filteredUserRoleKeyList="filteredUserRoleKeyList"
       @performUserClickAction="handleUserClickAction" class="m-6 overflow-scroll px-0" />
 
-    <Info v-if="error" :msgToShow="GenericServerErrorMessageTwo" />
+    <Info v-if="error || filteredUsers.length === 0" :obj="getInfoCompObjToPass" />
 
-    <UserList :filteredUsers="filteredUsers" v-if="result" class="m-6 overflow-scroll px-0 overflow-x-auto" />
+    <UserList :filteredUsers="filteredUsers" v-if="result && filteredUsers.length !== 0"
+      class="m-6 overflow-scroll px-0 overflow-x-auto" />
 
     <TableSkeleton v-if="loading" class="m-6 overflow-scroll px-0 overflow-x-auto" />
 
@@ -35,7 +36,7 @@ import TableSkeleton from "../components/user/TableSkeleton.vue";
 import Info from "../components/global/Info.vue";
 import UserList from "../components/user/UserList.vue";
 import Navbar from '../components/global/Navbar.vue';
-import { UserRoleEnum, NumberOfRecordFoundMsg, UserOperationEnum, GenericServerErrorMessageTwo } from "../utils/AppConstant";
+import { UserRoleEnum, NumberOfRecordFoundMsg, UserOperationEnum, GenericServerErrorMessageTwo, NoUsersFoundMsg, GenericServerErrorMessageOne, ServerWaitMsgText, DefaultInfoComponentObj, MsgTypeEnum } from "../utils/AppConstant";
 import type { EmitValue } from "./../types/Interface";
 import { GET_USERS } from "../graphql/Queries";
 
@@ -46,6 +47,25 @@ const selectedRoleForFilter = ref<number>(-1);
 const filteredUserRoleKeyList = Object.keys(UserRoleEnum).filter(key => isNaN(Number(key)));
 
 const canManageUsers = computed(() => authStore.user?.role === UserRoleEnum.Admin);
+
+const getInfoCompObjToPass = computed(() => {
+
+  const objToReturn = DefaultInfoComponentObj;
+  if (loading.value) {
+    objToReturn.msg = ServerWaitMsgText;
+    objToReturn.type = MsgTypeEnum.Info;
+  }
+  if (error.value) {
+    objToReturn.msg = GenericServerErrorMessageTwo;
+    objToReturn.type = MsgTypeEnum.Error;
+  }
+  if (filteredUsers.value.length === 0) {
+    objToReturn.msg = NoUsersFoundMsg;
+    objToReturn.type = MsgTypeEnum.Info;
+  }
+  return objToReturn;
+
+});
 
 const filteredUsers = computed(() => {
   const users = result.value?.users || [];

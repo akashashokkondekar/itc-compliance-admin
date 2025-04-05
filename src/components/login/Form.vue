@@ -38,7 +38,7 @@ import { useRouter } from "vue-router";
 import { useAuthStore } from "./../../stores/auth";
 import { useNetworkStatusStore } from "./../../stores/network";
 import { useMutation } from "@vue/apollo-composable";
-import { LoginFormHeaderText, LoginFormHeaderDescText, ToastTypeEnum, GenericServerErrorMessageOne, EmailIdPlaceHolderText, PasswordPlaceHolderText, PostLoginButtonClickText, GenericServerErrorMessageTwo, NoInternetConnectionAvailableMsg, MinPasswordCharLength, HidePasswordIcon, ShowPasswordIcon } from "./../../utils/AppConstant";
+import { LoginFormHeaderText, LoginFormHeaderDescText, MsgTypeEnum, GenericServerErrorMessageOne, EmailIdPlaceHolderText, PasswordPlaceHolderText, PostLoginButtonClickText, GenericServerErrorMessageTwo, NoInternetConnectionAvailableMsg, MinPasswordCharLength, HidePasswordIcon, ShowPasswordIcon } from "./../../utils/AppConstant";
 import { AppUtils } from "../../utils/AppUtils";
 import { LOGIN_MUTATION } from "../../graphql/Queries";
 
@@ -73,7 +73,7 @@ const handleSignInBtnClick = async () => {
   try {
 
     if (!networkStatus.isOnline) {
-      AppUtils.showToastMsg(NoInternetConnectionAvailableMsg, ToastTypeEnum.Error);
+      AppUtils.showToastMsg(NoInternetConnectionAvailableMsg, MsgTypeEnum.Error);
       return;
     }
 
@@ -88,11 +88,11 @@ const handleSignInBtnClick = async () => {
         router.push("/dashboard");
 
       } else {
-        AppUtils.showToastMsg(GenericServerErrorMessageTwo, ToastTypeEnum.Error);
+        AppUtils.showToastMsg(GenericServerErrorMessageTwo, MsgTypeEnum.Error);
       }
 
     } else {
-      AppUtils.showToastMsg(GenericServerErrorMessageOne, ToastTypeEnum.Error);
+      AppUtils.showToastMsg(GenericServerErrorMessageOne, MsgTypeEnum.Error);
     }
 
   } catch (err) {

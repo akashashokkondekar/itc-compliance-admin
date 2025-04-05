@@ -82,7 +82,7 @@ import { onMounted } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import { Dropdown } from "flowbite";
 import { useAuthStore } from "../../stores/auth";
-import { AdminIntroHeaderText, FeatureUnderDevelopmentInfoText, FifthOptionText, FirstOptionText, FourthOptionText, SecondOptionText, ThirdOptionText, ToastTypeEnum, UserOperationEnum } from "../../utils/AppConstant";
+import { AdminIntroHeaderText, FeatureUnderDevelopmentInfoText, FifthOptionText, FirstOptionText, FourthOptionText, SecondOptionText, ThirdOptionText, MsgTypeEnum, UserOperationEnum } from "../../utils/AppConstant";
 import { AppUtils } from "../../utils/AppUtils";
 
 const route = useRoute();
@@ -122,7 +122,7 @@ const handleUserClick = (selectedUserActionEnum: number): void => {
       break;
 
     case UserOperationEnum.Open_Settings:
-      AppUtils.showToastMsg(FeatureUnderDevelopmentInfoText, ToastTypeEnum.Info);
+      AppUtils.showToastMsg(FeatureUnderDevelopmentInfoText, MsgTypeEnum.Info);
       break;
 
     case UserOperationEnum.Handle_Signout:

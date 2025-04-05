@@ -47,11 +47,11 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { useNetworkStatusStore } from "../../stores/network";
-import { DefaultUserCreationObj, MinPasswordCharLength, MinNameCharLength, PostNewUserCreationMsg, ToastTypeEnum, UserOperationEnum, NoInternetConnectionAvailableMsg, NameInputLabelText, NameInputPlaceHolderText, EmailInputLabelText, EmailIdPlaceHolderText, PasswordInputLabelText, PasswordInputPlaceHolderText, RoleInputLabelText, CloseCreateNewUserModalBtnText, CreateUserBtnText } from "../../utils/AppConstant";
-import type { DefaultUserObj, EmitValue } from "../../types/Interface";
+import { DefaultUserCreationObj, MinPasswordCharLength, MinNameCharLength, PostNewUserCreationMsg, MsgTypeEnum, UserOperationEnum, NoInternetConnectionAvailableMsg, NameInputLabelText, NameInputPlaceHolderText, EmailInputLabelText, EmailIdPlaceHolderText, PasswordInputLabelText, PasswordInputPlaceHolderText, RoleInputLabelText, CloseCreateNewUserModalBtnText, CreateUserBtnText } from "../../utils/AppConstant";
+import type { UserObj, EmitValue } from "../../types/Interface";
 import { AppUtils } from "../../utils/AppUtils";
 
-const newUser = ref<DefaultUserObj>(DefaultUserCreationObj);
+const newUser = ref<UserObj>(DefaultUserCreationObj);
 const networkStatus = useNetworkStatusStore();
 
 defineProps<{ filteredUserRoleKeyList: any }>();
@@ -80,11 +80,11 @@ const createUser = () => {
   try {
 
     if (!networkStatus.isOnline) {
-      AppUtils.showToastMsg(NoInternetConnectionAvailableMsg, ToastTypeEnum.Error);
+      AppUtils.showToastMsg(NoInternetConnectionAvailableMsg, MsgTypeEnum.Error);
       return;
     }
 
-    AppUtils.showToastMsg(PostNewUserCreationMsg.replace("{name}", newUser.value.name), ToastTypeEnum.Success);
+    AppUtils.showToastMsg(PostNewUserCreationMsg.replace("{name}", newUser.value.name), MsgTypeEnum.Success);
     closeCreateNewUserModal();
 
   } catch (err) {
