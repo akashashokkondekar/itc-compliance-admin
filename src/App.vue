@@ -9,11 +9,13 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import { useAuthStore } from "./stores/auth";
+import { useUserStore } from "./stores/user";
 import { useNetworkStatusStore } from "./stores/network";
 import LostNetworkInfoStrip from "./components/global/LostNetworkInfoStrip.vue";
 import Splash from "./components/global/Splash.vue";
 
 const authStore = useAuthStore();
+const userStore = useUserStore();
 const networkStatus = useNetworkStatusStore();
 const isOnline = ref(navigator.onLine);
 
@@ -29,7 +31,8 @@ onBeforeUnmount(() => {
 });
 
 onMounted(() => {
-  authStore.loadFromStorage();
+  authStore.loadCurrUserObjFromStorage();
+  userStore.loadUserListFromStorage();
   window.addEventListener('online', updateNetworkStatus);
   window.addEventListener('offline', updateNetworkStatus);
 });

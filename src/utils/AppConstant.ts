@@ -85,6 +85,11 @@ export const HideAutoCloseProgressBar: boolean = false;
 export const ToastTheme: string = "dark";
 export const ToastPosition: any = toast.POSITION.BOTTOM_RIGHT;
 
+// Localstorage
+export const CurrUserTokenKey = "Token";
+export const CurrUserObjKey = "CurrUserObj";
+export const UserListKey = "UserList";
+
 // Roles
 export const NoneRoleText: string = "Unknown";
 export const AdminRoleText: string = "Administrator";

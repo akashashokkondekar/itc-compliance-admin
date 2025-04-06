@@ -82,12 +82,14 @@ import { onMounted } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import { Dropdown } from "flowbite";
 import { useAuthStore } from "../../stores/auth";
+import { useUserStore } from "../../stores/user";
 import { AdminIntroHeaderText, FeatureUnderDevelopmentInfoText, FifthOptionText, FirstOptionText, FourthOptionText, SecondOptionText, ThirdOptionText, MsgTypeEnum, UserOperationEnum } from "../../utils/AppConstant";
 import { AppUtils } from "../../utils/AppUtils";
 
 const route = useRoute();
 const router = useRouter();
 const authStore = useAuthStore();
+const userStore = useUserStore();
 
 defineProps<{ preLoginScreen: boolean }>();
 
@@ -127,6 +129,7 @@ const handleUserClick = (selectedUserActionEnum: number): void => {
 
     case UserOperationEnum.Handle_Signout:
       authStore.logout();
+      userStore.clearUserList();
       router.push('/')
       break;
 
