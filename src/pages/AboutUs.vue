@@ -1,36 +1,34 @@
 <template>
-  <main>
+
+  <div class="min-h-screen ">
     <Navbar :preLoginScreen="false" />
-  </main>
 
-  <section class="bg-gray-100 min-h-screen flex flex-col items-center p-6">
+    <section class="flex flex-col items-center p-6">
+      <IntroUI :obj="objToPass" />
+      <div class="mt-12 w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-    <Intro :obj="objToPass" />
+        <div v-for="memberObj in team" :key="memberObj.id"
+          class="bg-white pt-5 pb-7 pl-5 pr-5 rounded-lg shadow-2xl flex flex-col items-center">
+          <MemberView :member="memberObj" />
+        </div>
 
-    <div class="mt-12 w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-
-      <div v-for="member in team" :key="member.id"
-        class="bg-white pt-5 pb-7 pl-5 pr-5 rounded-lg shadow-md flex flex-col items-center">
-        <img :src="member.image" class="w-24 h-24 rounded-full object-cover aspect-square shadow-md"
-          alt="Team Member" />
-        <h2 class="mt-3 text-xl font-semibold">{{ member.name }}</h2>
-        <p class="text-black-600 mt-1 text-sm">{{ member.role }}</p>
-        <p class="text-gray-400 mt-2 text-sm">{{ member.info }}</p>
       </div>
+    </section>
 
-    </div>
+  </div>
 
-  </section>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import Intro from "../components/about-us/Intro.vue";
+import IntroUI from "../components/about-us/Intro.vue";
 import Navbar from "../components/global/Navbar.vue";
 import { AboutUsInitialIntroText, DefaultIntroComponentObj, DummyTeamInfoArr, ThirdOptionText } from "../utils/AppConstant";
+import MemberView from "../components/about-us/MemberView.vue";
+import type { Intro, Member } from "../types/Interface";
 
-const team = ref(DummyTeamInfoArr);
-const objToPass = ref(DefaultIntroComponentObj);
+const team = ref<Member[]>(DummyTeamInfoArr);
+const objToPass = ref<Intro>(DefaultIntroComponentObj);
 
 onMounted(() => {
   objToPass.value.header = ThirdOptionText;

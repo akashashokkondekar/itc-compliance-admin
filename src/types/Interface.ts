@@ -21,4 +21,12 @@ export interface Info {
   type: number
 }
 
+export interface Member {
+  id: number,
+  name: string,
+  role: string,
+  info: string,
+  image: string
+}
+
 export type UserList = UserObj[];

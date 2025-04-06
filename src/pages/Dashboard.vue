@@ -1,9 +1,9 @@
 <template>
 
-  <main>
-    <Navbar :preLoginScreen="false"/>
-    <section class="bg-gray-100 min-h-screen flex flex-col items-center p-6">
-      <Intro :obj="objToPass"/>
+  <main class="min-h-screen overflow-x-hidden overflow-y-auto">
+    <Navbar :preLoginScreen="false" />
+    <section class="flex flex-col items-center p-6">
+      <Intro :obj="objToPass" />
     </section>
   </main>
 
