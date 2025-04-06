@@ -46,7 +46,7 @@ router.beforeEach((to, _from, next) => {
 
   const authStore = useAuthStore();
   if (!authStore.token) {
-    authStore.loadFromStorage();
+    authStore.loadCurrUserObjFromStorage();
   }
 
   if (to.meta.requiresAuth && !authStore.token) {

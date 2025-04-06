@@ -1,6 +1,6 @@
 <template>
   <nav class="bg-[#19315b] border-gray-200">
-   
+
     <div class="flex flex-wrap items-center justify-between mx-auto p-4">
 
       <RouterLink to="/dashboard" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -42,7 +42,7 @@
 
       </div>
 
-      <div v-if="!preLoginScreen" class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+      <div v-if="!preLoginScreen" class="items-center justify-between w-full md:flex md:w-auto md:order-1"
         id="navbar-user">
 
         <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-[#19315b] 
@@ -82,12 +82,14 @@ import { onMounted } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import { Dropdown } from "flowbite";
 import { useAuthStore } from "../../stores/auth";
+import { useUserStore } from "../../stores/user";
 import { AdminIntroHeaderText, FeatureUnderDevelopmentInfoText, FifthOptionText, FirstOptionText, FourthOptionText, SecondOptionText, ThirdOptionText, MsgTypeEnum, UserOperationEnum } from "../../utils/AppConstant";
 import { AppUtils } from "../../utils/AppUtils";
 
 const route = useRoute();
 const router = useRouter();
 const authStore = useAuthStore();
+const userStore = useUserStore();
 
 defineProps<{ preLoginScreen: boolean }>();
 
@@ -127,6 +129,7 @@ const handleUserClick = (selectedUserActionEnum: number): void => {
 
     case UserOperationEnum.Handle_Signout:
       authStore.logout();
+      userStore.clearUserList();
       router.push('/')
       break;
 
@@ -136,3 +139,4 @@ const handleUserClick = (selectedUserActionEnum: number): void => {
 </script>
 
 <style lang="css" scoped></style>
+  

@@ -4,25 +4,34 @@
 
     <div class="bg-white p-10 rounded-lg shadow-lg w-130">
 
+      <div class="mb-4">
+        <h2 class="text-2xl font-semibold text-[#19315b]">{{ CreateNewUserModalHeaderText }}</h2>
+        <p class="text-cyan-800 text-shadow-1xs text-sm">{{ CreateNewUserModalDescText }}</p>
+      </div>
+
       <label class="block text-sm text-gray-700">{{ NameInputLabelText }}</label>
       <input v-model="newUser.name" type="text" :placeholder="NameInputPlaceHolderText"
-        class="w-full p-2 border rounded-lg mb-2">
+        class="w-full p-2 border rounded-lg">
+      <p class="text-sm text-gray-400 mb-2">{{ NameInputHintText }}</p>
 
       <label class="block pt-3 text-sm text-gray-700">{{ EmailInputLabelText }}</label>
       <input v-model="newUser.email" type="email" :placeholder="EmailIdPlaceHolderText"
-        class="w-full p-2 border rounded-lg mb-2">
+        class="w-full p-2 border rounded-lg">
+      <p class="text-sm text-gray-400 mb-2">{{ EmailInputHintText }}</p>
 
       <label class="block pt-3 text-sm text-gray-700">{{ PasswordInputLabelText }}</label>
       <input v-model="newUser.password" type="text" :placeholder="PasswordInputPlaceHolderText"
-        class="w-full p-2 border rounded-lg mb-2">
+        class="w-full p-2 border rounded-lg">
+      <p class="text-sm text-gray-400 mb-2">{{ PasswordInputHintText }}</p>
 
       <label class="block pt-3 text-sm text-gray-700">{{ RoleInputLabelText }}</label>
-      <select v-model="newUser.role" class="w-full p-2 border rounded-lg mb-4">
+      <select v-model="newUser.role" class="w-full p-2 border rounded-lg">
         <option v-for="(currRole, index) in filteredUserRoleKeyList" :key="index"
           :value="AppUtils.getEnumValueFromKeyName(currRole)">
           {{ AppUtils.getNewRoleNameByKey(currRole) }}
         </option>
       </select>
+      <p class="text-sm text-gray-400 mb-4">{{ RoleInputHintText }}</p>
 
       <div class="flex pt-4 justify-center">
 
@@ -47,7 +56,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { useNetworkStatusStore } from "../../stores/network";
-import { DefaultUserCreationObj, MinPasswordCharLength, MinNameCharLength, PostNewUserCreationMsg, MsgTypeEnum, UserOperationEnum, NoInternetConnectionAvailableMsg, NameInputLabelText, NameInputPlaceHolderText, EmailInputLabelText, EmailIdPlaceHolderText, PasswordInputLabelText, PasswordInputPlaceHolderText, RoleInputLabelText, CloseCreateNewUserModalBtnText, CreateUserBtnText } from "../../utils/AppConstant";
+import { DefaultUserCreationObj, MinPasswordCharLength, MinNameCharLength, PostNewUserCreationMsg, MsgTypeEnum, UserOperationEnum, NoInternetConnectionAvailableMsg, NameInputLabelText, NameInputPlaceHolderText, EmailInputLabelText, EmailIdPlaceHolderText, PasswordInputLabelText, PasswordInputPlaceHolderText, RoleInputLabelText, CloseCreateNewUserModalBtnText, CreateUserBtnText, CreateNewUserModalHeaderText, CreateNewUserModalDescText, NameInputHintText, EmailInputHintText, PasswordInputHintText, RoleInputHintText } from "../../utils/AppConstant";
 import type { UserObj, EmitValue } from "../../types/Interface";
 import { AppUtils } from "../../utils/AppUtils";
 
