@@ -4,7 +4,7 @@ import type { UserObj, Info, Intro } from "../types/Interface";
 // Login
 export const LoginFormHeaderText: string = "Sign In";
 export const LoginFormHeaderDescText: string = "If you have an account, please login:";
-export const EmailIdPlaceHolderText: string = "john.doe@gmail.com";
+export const EmailIdPlaceHolderText: string = "john.doe@example.com";
 export const PasswordPlaceHolderText: string = "Password";
 export const PostLoginButtonClickText: string = "Verifying...";
 export const MinPasswordCharLength: number = 4;
@@ -54,16 +54,23 @@ export const ContentNotFoundText: string = "Opsss...page not found.";
 export const BackToHomeOptionText: string = "Back to Home";
 
 // CreateNewUser Modal
+export const CreateNewUserModalHeaderText = "Add New User";
+export const CreateNewUserModalDescText = "Provide the following details to register a new user.";
 export const CloseCreateNewUserModalBtnText: string = "Close";
 export const NameInputLabelText: string = "Name:";
 export const NameInputPlaceHolderText: string = "John Doe";
+export const NameInputHintText: string = "Enter full name (e.g., John Doe)";
 export const EmailInputLabelText: string = "Email:";
+export const EmailInputHintText: string = "Enter a valid email address (e.g., john@example.com)";
 export const PasswordInputLabelText: string = "Password:";
-export const PasswordInputPlaceHolderText: string = `Minimum of ${MinPasswordCharLength} characters required.`;
+export const PasswordInputPlaceHolderText: string = "1^%aA";
+export const PasswordInputHintText: string = `Minimum of ${MinPasswordCharLength} characters required.`;
 export const RoleInputLabelText: string = "Role:";
+export const RoleInputHintText: string = "Select the user's role";
 export const PostNewUserCreationMsg: string = "The user '{name}' has been created successfully.";
 export const MinNameCharLength: number = 4;
 export const CreateUserBtnText: string = "Create";
+
 
 // NavBar
 export const FirstOptionText: string = "Dashboard";
@@ -124,7 +131,7 @@ export enum UserOperationEnum {
 export const DefaultUserCreationObj: UserObj = {
   id: "45T88-34DFs-hhedd$-yt123",
   name: "Harry Potter",
-  email: "harry.potter@gmail.com",
+  email: "harry.potter@example.com",
   role: UserRoleEnum.User,
   password: '4%@qEE'
 };
