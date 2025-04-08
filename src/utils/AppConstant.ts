@@ -113,6 +113,12 @@ export enum UserRoleEnum {
   User = 2
 };
 
+export enum ServerEnum {
+  Local = 0,
+  Dev = 1,
+  Prod = 2
+};
+
 export enum MsgTypeEnum {
   Default = 0,
   Info = 1,

@@ -6,7 +6,7 @@ export class AppUtils {
 
   static getRoleName = (userRole: number): string => {
 
-    let valueToReturn = "";
+    let valueToReturn: string = "";
     switch (userRole) {
     
       default:
@@ -28,7 +28,7 @@ export class AppUtils {
 
   static getToastType = (toastType: number): any => {
 
-    let valueToReturn = "info";
+    let valueToReturn: string = "info";
     switch (toastType) {
 
       default:
@@ -74,7 +74,7 @@ export class AppUtils {
 
   static getNewRoleNameByKey = (key: any): string => {
 
-    var valueToReturn = NoneRoleText;
+    let valueToReturn: string = NoneRoleText;
 
     switch (parseInt(UserRoleEnum[key])) {
     

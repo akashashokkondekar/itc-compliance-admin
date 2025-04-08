@@ -10,9 +10,10 @@ import router from "./router/router";
 import "vue-awesome-paginate/dist/style.css";
 import "vue3-toastify/dist/index.css";
 import "./style.css";
+import { ServerUtils } from "./utils/ServerUtils";
 
 const apolloClient = new ApolloClient({
-  uri: "http://localhost:4000/",
+  uri: ServerUtils.GetServerURL(),
   cache: new InMemoryCache(),
 });
 
