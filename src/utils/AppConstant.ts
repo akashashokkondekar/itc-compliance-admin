@@ -93,7 +93,7 @@ export const NoInternetConnectionAvailableMsg: string = "You are currently offli
 export const AutoCloseToastTimeout: number = 2000; // In ms
 export const SupportRTFInToast: boolean = true;
 export const HideAutoCloseProgressBar: boolean = false;
-export const ToastTheme: string = "dark";
+export const ToastTheme: any = "dark";
 export const ToastPosition: any = toast.POSITION.BOTTOM_RIGHT;
 
 // Localstorage
